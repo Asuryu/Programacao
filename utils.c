@@ -19,21 +19,44 @@ int probEvento(float prob){
     return prob > ((float)rand()/RAND_MAX);
 }
 
+int existeFicheiro(){
+    FILE *f;
 
-// Função main () com alguns exemplos simples de utilizacao das funcoes
-int main(){
+    f = fopen("jogo.bin", "rb");
+    if(f == NULL) return 0;
+    return 1;
+}
 
-  int i;
+void gerarTabuleiro(char **tabuleiro, int dim){
+    tabuleiro = malloc (dim * sizeof (char *));
+    for (int i = 0; i < dim; ++i)
+        tabuleiro[i] = malloc (dim * sizeof (char));
 
-    initRandom();   // esta função só deve ser chamada uma vez
+    for(int a = 0; a < dim; a++){
+        for(int b = 0; b < dim; b++){
+            tabuleiro[a][b] = 'X';
+        }
+    }
 
-    printf("10 valores aleatorios uniformes entre [4, 10]:\n");
-    for(i=0; i<10; i++)
-        printf("%d\n", intUniformRnd(4, 100));
+    for(int a = 0; a < dim; a++){
+        for(int b = 0; b < dim; b++){
+            printf("%c ", tabuleiro[a][b]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 
-    printf(" Probabilidade 0.25 de um evento suceder: \n");
-    for(i=0; i<10; i++)
-        printf("%d\n", probEvento(0.25));
+}
 
-    return 0;
+void mostrarTabuleiro(char **tabuleiro, int dim){
+
+    printf("%d", dim);
+    
+    for(int a = 0; a < dim; a++){
+        for(int b = 0; b < dim; b++){
+            printf("%c ", tabuleiro[a][b]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
