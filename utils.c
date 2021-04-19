@@ -28,13 +28,14 @@ int existeFicheiro(){
 }
 
 void gerarTabuleiro(char **tabuleiro, int dim){
+
     tabuleiro = malloc (dim * sizeof (char *));
     for (int i = 0; i < dim; ++i)
         tabuleiro[i] = malloc (dim * sizeof (char));
 
     for(int a = 0; a < dim; a++){
         for(int b = 0; b < dim; b++){
-            tabuleiro[a][b] = 'X';
+            tabuleiro[a][b] = '_';
         }
     }
 
@@ -46,17 +47,4 @@ void gerarTabuleiro(char **tabuleiro, int dim){
     }
     printf("\n");
 
-}
-
-void mostrarTabuleiro(char **tabuleiro, int dim){
-
-    printf("%d", dim);
-    
-    for(int a = 0; a < dim; a++){
-        for(int b = 0; b < dim; b++){
-            printf("%c ", tabuleiro[a][b]);
-        }
-        printf("\n");
-    }
-    printf("\n");
 }

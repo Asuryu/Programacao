@@ -39,7 +39,6 @@ int main(){
         int randomDim = intUniformRnd(3, 5);
         char **tabuleiro; 
         gerarTabuleiro(tabuleiro, randomDim);
-        mostrarTabuleiro(tabuleiro, randomDim);
     }
 
     return 0;

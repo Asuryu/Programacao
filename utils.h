@@ -21,7 +21,4 @@ int existeFicheiro();
 // Gera um tabuleiro quadrado de ordem dim
 void gerarTabuleiro(char **tabuleiro, int dim);
 
-// Mostra um tabuleiro 
-void mostrarTabuleiro(char **tabuleiro, int dim);
-
 #endif /* UTILS_H */
