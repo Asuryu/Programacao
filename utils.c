@@ -51,18 +51,13 @@ void mostrarASCII(){
 
 void howToPlay(){
     mostrarASCII();
-    printf("%sred\n", KRED);
-    printf("%sgreen\n", KGRN);
-    printf("%syellow\n", KYEL);
-    printf("%sblue\n", KBLU);
-    printf("%smagenta\n", KMAG);
-    printf("%scyan\n", KCYN);
-    printf("%swhite\n", KWHT);
-    printf("%snormal\n", KNRM);
+    printf("");
+    printf("");
 }
 
 void menu(){
 
+    printf("\e[1;1H\e[2J");
     mostrarASCII();
     int escolha;
     printf("1 - Começar um jogo\n");

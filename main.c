@@ -11,6 +11,7 @@
 int main(){
 
     if(existeFicheiro()){
+        
         mostrarASCII();
         char escolha;
         printf("Foi encontrado um ficheiro de jogo.\nPretende continuar o jogo anterior? (S/N)\n");
