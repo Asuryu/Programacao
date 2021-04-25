@@ -27,7 +27,7 @@ int existeFicheiro(){
     return 1;
 }
 
-void gerarTabuleiro(char **tabuleiro, int dim){
+char** gerarTabuleiro(char **tabuleiro, int dim){
 
     tabuleiro = malloc (dim * sizeof (char *));
     for (int i = 0; i < dim; ++i)
@@ -46,5 +46,7 @@ void gerarTabuleiro(char **tabuleiro, int dim){
         printf("\n");
     }
     printf("\n");
+
+    return tabuleiro;
 
 }

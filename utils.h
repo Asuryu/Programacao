@@ -19,6 +19,6 @@ int probEvento(float prob);
 int existeFicheiro();
 
 // Gera um tabuleiro quadrado de ordem dim
-void gerarTabuleiro(char **tabuleiro, int dim);
+char** gerarTabuleiro(char **tabuleiro, int dim);
 
 #endif /* UTILS_H */

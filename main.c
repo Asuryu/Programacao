@@ -37,8 +37,11 @@ int main(){
 
     else {
         int randomDim = intUniformRnd(3, 5);
-        char **tabuleiro; 
-        gerarTabuleiro(tabuleiro, randomDim);
+        char **tabuleiro;
+        tabuleiro = gerarTabuleiro(tabuleiro, randomDim);
+
+        printf("%c", *tabuleiro[0]);
+
     }
 
     return 0;
