@@ -4,11 +4,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-typedef struct Jogador{
-    int pedras;
-    int expandir;
-} jogadorA, jogadorB;
-
 // Inicializa o gerador de numeros aleatorios.
 // Esta funcao deve ser chamada apenas uma vez no inicio da execucao do programa
 void initRandom();

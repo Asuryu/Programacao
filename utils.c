@@ -57,11 +57,11 @@ void howToPlay(){
 
 void menu(){
 
-    printf("\e[1;1H\e[2J");
     mostrarASCII();
     int escolha;
-    printf("1 - Começar um jogo\n");
-    printf("2 - Instruções de como jogar\n");
+    printf("1 - Jogador vs Jogador\n");
+    printf("2 - Jogador vs Computador\n");
+    printf("3 - Instruções de como jogar\n");
     printf("0 - Sair do jogo\n\n");
 
     printf("Opção: ");
@@ -71,6 +71,8 @@ void menu(){
         case 1:
             break;
         case 2:
+            break;
+        case 3:
             howToPlay();
         case 0:
             exit(0);
@@ -100,11 +102,11 @@ char **gerarTabuleiro(int dim){
 
 }
 
-void mostrarTabuleiro(char **tabuleiro, int dim){
+void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas){
 
     mostrarASCII();
-    for(int i = 0; i < dim; i++){
-        for(int j = 0; j < dim; j++){
+    for(int i = 0; i < linhas; i++){
+        for(int j = 0; j < colunas; j++){
             printf("%c ", tabuleiro[i][j]);
         }
         printf("\n");
@@ -115,6 +117,13 @@ void mostrarTabuleiro(char **tabuleiro, int dim){
 int colocarPeca(char **tabuleiro, char cor, int l, int c){
 
     switch(cor){
+        case 'X':
+            if(tabuleiro[l][c] == '_'){
+                tabuleiro[l][c] = 'X';
+                return 1;
+            }
+            printf("Não podes colocar uma PEDRA nessa posição\n");
+            return 0;
         case 'G':
             if(tabuleiro[l][c] == '_'){
                 tabuleiro[l][c] = 'G';
@@ -143,10 +152,15 @@ int colocarPeca(char **tabuleiro, char cor, int l, int c){
             printf("Escolhe uma cor válida para jogares\n");
             return 0;
     }
-        
 
-    if(tabuleiro[l][c] == '_'){
-        tabuleiro[l][c] = 'V';
+}
+
+char **expandirTabuleiro(char **tabuleiro, int dim, char tipo){
+    if(tipo == 'L'){
+        tabuleiro = (char **)realloc(tabuleiro, sizeof(char *) * dim + 1);
     }
+
+
+    return tabuleiro;
 
 }
