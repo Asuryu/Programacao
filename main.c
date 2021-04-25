@@ -6,21 +6,12 @@
 #include <time.h>
 
 #include "utils.h"
+#include "utils.c"
 
 int main(){
 
-    system("clear");
-    initRandom();
-
-    printf("   _____                      ____                     \n");
-    printf("  / ___/___  ____ ___  ____ _/ __/___  _________  _____\n");
-    printf("  |__ \\/ _ \\/ __ `__ \\/ __ `/ /_/ __ \\/ ___/ __ \\/ ___/\n");
-    printf(" ___/ /  __/ / / / / / /_/ / __/ /_/ / /  / /_/ (__  ) \n");
-    printf("/____/\\___/_/ /_/ /_/\\__,_/_/  \\____/_/   \\____/____/  \n");
-    printf("                                                       \n");
-    printf("Jogo dos Semáforos - Trabalho Prático de Programação\n\n\n");
-
     if(existeFicheiro()){
+        mostrarASCII();
         char escolha;
         printf("Foi encontrado um ficheiro de jogo.\nPretende continuar o jogo anterior? (S/N)\n");
         do {
@@ -36,11 +27,23 @@ int main(){
     }
 
     else {
+        menu();
+        initRandom();
         int randomDim = intUniformRnd(3, 5);
-        char **tabuleiro;
-        tabuleiro = gerarTabuleiro(tabuleiro, randomDim);
+        char **tabuleiro = gerarTabuleiro(randomDim);
+        mostrarTabuleiro(tabuleiro, randomDim);
 
-        printf("%c", *tabuleiro[0]);
+
+        int linha, coluna;
+        char cor;
+
+        while(1){
+            printf("Onde queres colocar a tua peça? (Linha/Coluna/Cor): ");
+            scanf("%d/%d/%c", &linha, &coluna, &cor);
+
+            colocarPeca(tabuleiro, cor, linha, coluna);
+            mostrarTabuleiro(tabuleiro, randomDim);
+        }
 
     }
 

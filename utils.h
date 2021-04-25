@@ -4,6 +4,11 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+typedef struct Jogador{
+    int pedras;
+    int expandir;
+} jogadorA, jogadorB;
+
 // Inicializa o gerador de numeros aleatorios.
 // Esta funcao deve ser chamada apenas uma vez no inicio da execucao do programa
 void initRandom();
@@ -18,7 +23,5 @@ int probEvento(float prob);
 // Return 0: O ficheiro não existe ---- Return 1: O ficheiro existe
 int existeFicheiro();
 
-// Gera um tabuleiro quadrado de ordem dim
-char** gerarTabuleiro(char **tabuleiro, int dim);
 
 #endif /* UTILS_H */
