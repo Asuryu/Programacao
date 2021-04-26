@@ -7,14 +7,6 @@
 
 #include "utils.h"
 
-#define KNRM  "\x1B[0m"
-#define KRED  "\x1B[31m"
-#define KGRN  "\x1B[32m"
-#define KYEL  "\x1B[33m"
-#define KBLU  "\x1B[34m"
-#define KMAG  "\x1B[35m"
-#define KCYN  "\x1B[36m"
-#define KWHT  "\x1B[37m"
 
 void initRandom(){
     srand(time(NULL));
@@ -49,11 +41,7 @@ void mostrarASCII(){
 
 }
 
-void howToPlay(){
-    mostrarASCII();
-    printf("");
-    printf("");
-}
+void howToPlay();
 
 void menu(){
 
@@ -82,85 +70,60 @@ void menu(){
 
 }
 
-char **gerarTabuleiro(int dim){
+void howToPlay(){
+    mostrarASCII();
+    printf("");
+    printf("> O jogo do Semáforo é um jogo de tabuleiro entre 2 pessoas que efetuam jogadas alternadas\n");
+    printf("até que uma delas vença ou que se verifique um empate\n\n");
+    printf("> É gerado um tabuleiro quadrado com dimensão aleatória (entre 3 e 5 linhas) e cada jogador\n");
+    printf("pode escolher jogar uma peça ou utilizar uma habilidade espcial.\n");
+    printf("\nContinuar? (S/N) ");
+    char continuar, continuar1;
+    do {
+        scanf("%c", &continuar);
 
-    char **tabuleiro;
- 
-    tabuleiro = (char **)malloc(sizeof(char *)*dim);
+        if (continuar == 'N') menu();
+        else if (continuar == 'S') break;
 
-    for(int i = 0; i < dim; i++){
-        tabuleiro[i] = (char *)malloc(sizeof(char)*dim);
-    }
-
-    for(int i = 0; i < dim; i++){
-        for(int j = 0; j < dim; j++){
-            tabuleiro[i][j] = '_';
-        }
-    }
-
-    return tabuleiro;
-
-}
-
-void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas){
+    } while (continuar != 'S' || continuar != 'N');
 
     mostrarASCII();
-    for(int i = 0; i < linhas; i++){
-        for(int j = 0; j < colunas; j++){
-            printf("%c ", tabuleiro[i][j]);
-        }
-        printf("\n");
-    }
+    printf("> Alternadamente os jogadores vão colocando peças de cor\nVERDE (G), AMARELA (Y) e VERMELHA (R)\n\n");
+    printf("> Ganha o jogador que coloque uma peça que permita formar\numa linha, coluna ou diagonal completa com peças da mesma cor\n");
+    printf("\nContinuar? (S/N) ");
+    do {
+        scanf("%c", &continuar1);
 
-}
+        if (continuar1 == 'N') menu();
+        else if (continuar1 == 'S') break;
 
-int colocarPeca(char **tabuleiro, char cor, int l, int c){
+    } while (continuar1 != 'S' || continuar1 != 'N');
 
-    switch(cor){
-        case 'X':
-            if(tabuleiro[l][c] == '_'){
-                tabuleiro[l][c] = 'X';
-                return 1;
-            }
-            printf("Não podes colocar uma PEDRA nessa posição\n");
-            return 0;
-        case 'G':
-            if(tabuleiro[l][c] == '_'){
-                tabuleiro[l][c] = 'G';
-                return 1;
-            }
-            printf("Não podes colocar a peça VERDE nessa posição\n");
-            return 0;
+    mostrarASCII();
+    printf("> As jogadas válidas relativas a colocar uma peça são as seguintes:\n\n");
+    printf("1. Colocar uma peça VERDE numa célula vazia\n");
+    printf("2. Trocar uma peça VERDE por uma peça AMARELA\n");
+    printf("3. Trocar uma peça AMARELA por uma peça VERMELHA\n");
+    printf("\nContinuar? (S/N) ");
+    do {
+        scanf("\n%c", &continuar);
 
-        case 'Y':
-            if(tabuleiro[l][c] == 'G'){
-                tabuleiro[l][c] = 'Y';
-                return 1;
-            }
-            printf("Não podes colocar a peça AMARELA nessa posição\n");
-            return 0;
+        if (continuar == 'N') menu();
+        else if (continuar == 'S') break;
 
-        case 'R':
-            if(tabuleiro[l][c] == 'Y'){
-                tabuleiro[l][c] = 'R';
-                return 1;
-            }
-            printf("Não podes colocar a peça VERMELHA nessa posição\n");
-            return 0;
+    } while (continuar != 'S' || continuar != 'N');
 
-        default:
-            printf("Escolhe uma cor válida para jogares\n");
-            return 0;
-    }
+    mostrarASCII();
+    printf("> Para além de jogarem peças os jogadores podem também utilizar habilidades espciais:\n\n");
+    printf("1. Colocar uma pedra numa célula vazia (limitada a 1 por jogo)\n");
+    printf("2. Adicionar uma nova linha ou coluna ao final do tabuleiro (limitada a 2 por jogo)\n");
+    printf("\nContinuar? (S/N) ");
+    do {
+        scanf("%c", &continuar);
 
-}
+        if (continuar == 'N') menu();
+        else if (continuar == 'S') menu();
 
-char **expandirTabuleiro(char **tabuleiro, int dim, char tipo){
-    if(tipo == 'L'){
-        tabuleiro = (char **)realloc(tabuleiro, sizeof(char *) * dim + 1);
-    }
-
-
-    return tabuleiro;
+    } while (continuar != 'S' || continuar != 'N');
 
 }

@@ -7,12 +7,26 @@
 
 #include "utils.h"
 #include "utils.c"
+#include "engine.h"
+#include "engine.c"
 
-typedef struct Jogador{
+typedef struct {
     char nome;
     int pedras;
     int expandir;
-} A, B;
+} Jogador;
+
+int mainAAA(){
+    initRandom();
+    int randomDim = 3;
+    int linhasTotais = randomDim;
+    int colunasTotais = randomDim;
+
+    char **tabuleiro = gerarTabuleiro(randomDim);
+    linhasTotais += 2;
+    tabuleiro = expandirTabuleiro(tabuleiro, linhasTotais, colunasTotais, 'L');
+    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+}
 
 int main(){
 
@@ -37,8 +51,8 @@ int main(){
         menu();
         initRandom();
 
-        A jogadorA;
-        B jogadorB;
+        Jogador jogadorA;
+        Jogador jogadorB;
 
         jogadorA.nome = 'A';
         jogadorA.pedras = 1;
@@ -83,8 +97,8 @@ int main(){
                         expandir = jogadorA.expandir;
                     }
                     else{
-                        pedras = jogadorA.pedras;
-                        expandir = jogadorA.expandir;
+                        pedras = jogadorB.pedras;
+                        expandir = jogadorB.expandir;
                     }
 
                     printf("> Tens %d PEDRAS para jogares\n", pedras);
@@ -110,11 +124,12 @@ int main(){
                     if(habilidade == 'E' && expandir > 0){
                         printf("Qual é o tipo de expansão que queres fazer? (L - Linha / C - Coluna): ");
                         scanf("\n%c", &tipo);
+                        printf("%d", linhasTotais);
                         if(tipo == 'L') linhasTotais += 1;
                         else if(tipo == 'C') colunasTotais += 1;
                         else break;
 
-                        // EXPANDIR AS LINHAS E/OU AS COLUNAS
+                        tabuleiro = expandirTabuleiro(tabuleiro, linhasTotais, colunasTotais, tipo);
 
                         if(turno == 0){
                             jogadorA.expandir = expandir - 1;

@@ -18,5 +18,13 @@ int probEvento(float prob);
 // Return 0: O ficheiro não existe ---- Return 1: O ficheiro existe
 int existeFicheiro();
 
+// Limpa o ecrã e mostra uma arte em ASCII
+void mostrarASCII();
+
+// Mostra as instruções de como jogar o jogo
+void howToPlay();
+
+// Mostra um menu principal onde o jogador pode escolher o que quer fazer
+void menu();
 
 #endif /* UTILS_H */
