@@ -15,12 +15,13 @@ char **gerarTabuleiro(int dim);
 // Pode servir para dar refresh depois de uma jogada
 void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas);
 
-// Coloca uma peça de uma determinada cor e numa determinada posição
+// Coloca no tabuleiro uma peça de uma determinada cor e numa determinada posição
 // Verifica se a peça pode ser colocada nessa posição
 // Retorna o sucesso da operação (0 - Não permitido / 1 - Sucesso)
 //
 // Parâmetros (tabuleiro - Ponteiro duplo que aponta para o tabuleiro, cor - Cor da peça, l - Linha, c - Coluna) 
-int colocarPeca(char **tabuleiro, char cor, int l, int c);
+// Parâmetros (linhas - Nrº de linhas totais, colunas - Nrº de colunas totais) 
+int colocarPeca(char **tabuleiro, char cor, int l, int c, int linhas, int colunas);
 
 // Expande o tabuleiro em linhas ou em colunas
 // Retorna um double-pointer que aponta para o início do novo tabuleiro
