@@ -16,17 +16,11 @@ typedef struct {
     int expandir;
 } Jogador;
 
-int mainAAA(){
-    initRandom();
-    int randomDim = 3;
-    int linhasTotais = randomDim;
-    int colunasTotais = randomDim;
+typedef struct {
+    int colunas;
+    int linhas;  
+} Jogo;
 
-    char **tabuleiro = gerarTabuleiro(randomDim);
-    linhasTotais += 2;
-    tabuleiro = expandirTabuleiro(tabuleiro, linhasTotais, colunasTotais, 'L');
-    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
-}
 
 int main(){
 
@@ -74,6 +68,9 @@ int main(){
         char cor, escolha, habilidade, tipo;
 
         do{
+            mostrarASCII();
+            mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+
             if(turno == 0) printf("\n[JOGADOR A]\n");
             else printf("\n[JOGADOR B]\n");
 
@@ -84,7 +81,7 @@ int main(){
                     printf("Onde queres colocar a tua peça? (Linha Coluna Cor): ");
                     scanf("%d %d %c", &linha, &coluna, &cor);
 
-                    if(colocarPeca(tabuleiro, cor, linha, coluna)){
+                    if(colocarPeca(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais)){
                         if(turno == 0) turno = 1;
                         else turno = 0;
                     }
@@ -110,7 +107,7 @@ int main(){
                     if(habilidade == 'P' && pedras > 0){
                         printf("Onde queres colocar a tua pedra? (Linha Coluna): ");
                         scanf("%d %d", &linha, &coluna);
-                        if(colocarPeca(tabuleiro, 'X', linha, coluna)){
+                        if(colocarPeca(tabuleiro, 'X', linha, coluna, linhasTotais, colunasTotais)){
                             if(turno == 0){
                                 jogadorA.pedras = pedras - 1;
                                 turno = 1;
@@ -144,13 +141,12 @@ int main(){
                     break;
 
                 case 'E':
+                    free(tabuleiro);
                     exit(0);
 
                 default:
                     break;
             }
-
-            mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
 
         } while (1);
 
