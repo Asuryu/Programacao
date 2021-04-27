@@ -22,7 +22,7 @@ int guardaJogo(int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
 // Parâmetros (A e B - Ponteiro para a estrutura que vai guardar a informação do jogador A/B)
 int recuperaJogo(int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
 
-// Guarda a informação do jogo que terminou num ficheiro de texto com descrição das jogadas
+// Guarda a sucesão do tabuleiro ao longo do jogo num ficheiro de texto
 //
 // Parâmetros (ficheiro - Ponteiro para o array que contém o nome que o utiliador escolheu para o ficheiro)
 void exportarJogo(char *ficheiro);
