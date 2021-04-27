@@ -1,3 +1,4 @@
+// Trabalho Pratico Programacao - LEI
 // DEIS-ISEC 2020-2021
 
 #include <stdio.h>
@@ -5,6 +6,7 @@
 #include <time.h>
 
 #include "engine.h"
+#include "utils.h"
 
 char **gerarTabuleiro(int dim){
 
@@ -38,6 +40,58 @@ void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas){
 
     printf("\n");
 
+}
+
+int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int colunas, int turno){
+    
+    int horizontal = 0;
+    int vertical = 0;
+    int diagonal = 0;
+
+    for(int i = 0; i < colunas; i++){
+        if(tabuleiro[l-1][i] != cor) horizontal = 0;
+        else horizontal += 1;
+    }
+    for(int j = 0; j < linhas; j++){
+        if(tabuleiro[j][c - 1] != cor) vertical = 0;
+        else vertical += 1;
+    }
+    if(linhas == colunas){
+        for(int a = 0; a < linhas; a++){
+            if(tabuleiro[a][a] != cor) diagonal = 0;
+            else diagonal += 1;
+        }
+        for(int b = 0; b < linhas; b++){
+            if(tabuleiro[b][linhas - b] != cor) diagonal = 0;
+            else diagonal += 1;
+        }
+    }
+
+    if(horizontal == colunas){
+        mostrarASCII();
+        if(turno == 0) printf("\n*** O JOGADOR A É O VENCEDOR DO JOGO! ***\nLinha completada!\n");
+        else printf("\n*** O JOGADOR B É O VENCEDOR DO JOGO! ***\nLinha completada!\n");
+        scanf("%c", &cor);
+        return 1;
+    }
+    else if(vertical == linhas){
+        mostrarASCII();
+        if(turno == 0) printf("\n*** O JOGADOR A É O VENCEDOR DO JOGO! ***\nColuna completada!\n");
+        else printf("\n*** O JOGADOR B É O VENCEDOR DO JOGO! ***\nColuna Completada!\n");
+        scanf("%c", &cor);
+        return 1;
+    }
+    else if(diagonal == linhas){
+        mostrarASCII();
+        if(turno == 0) printf("\n*** O JOGADOR A É O VENCEDOR DO JOGO! ***\nDiagonal completada!\n");
+        else printf("\n*** O JOGADOR B É O VENCEDOR DO JOGO! ***\nDiagonal completada!\n");
+        scanf("%c", &cor);
+        return 1;
+    }
+    else {
+        return 0;
+    }
+    
 }
 
 int colocarPeca(char **tabuleiro, char cor, int l, int c, int linhas, int colunas){
