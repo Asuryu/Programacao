@@ -7,7 +7,6 @@
 
 #include "utils.h"
 
-
 void initRandom(){
     srand(time(NULL));
 }
@@ -25,6 +24,7 @@ int existeFicheiro(){
 
     f = fopen("jogo.bin", "rb");
     if(f == NULL) return 0;
+    fclose(f);
     return 1;
 }
 
@@ -59,7 +59,7 @@ void menu(){
         case 1:
             break;
         case 2:
-            break;
+            menu();
         case 3:
             howToPlay();
         case 0:
