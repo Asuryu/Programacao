@@ -47,7 +47,8 @@ int main(){
     Jogador jogadorA;
     Jogador jogadorB;
 
-    int randomDim, linhasTotais, colunasTotais;
+    int randomDim;
+    int linhasTotais, colunasTotais, turno;
     char **tabuleiro;
 
     if(flag == 0){
@@ -65,26 +66,27 @@ int main(){
         linhasTotais = randomDim;
         colunasTotais = randomDim;
 
-        tabuleiro = gerarTabuleiro(randomDim);
+        tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
     
     } else {
         // LER DO FICHEIRO DO JOGO ANTERIOR
 
         // Carregar:
-        // 1. Tabela
+        // 1. TABELA
         // 2. LINHAS E COLUNAS
         // 3. TURNO
         // 4. JOGADORES
 
-        int linhasTotais, colunasTotais, turno;
-        
-        recuperaJogo(&linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
+        recuperaJogo(tabuleiro, &linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
+        printf("%d\n", linhasTotais);
+        printf("%d\n", colunasTotais);
+        scanf("%d", &randomDim);
+
+        tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
 
     }
-    
-    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
 
-    int linha, coluna, pedras, expandir, turno = 0;
+    int linha, coluna, pedras, expandir;
     char cor, escolha, habilidade, tipo;
 
     do{
@@ -105,7 +107,8 @@ int main(){
                     if(jogadaVencedora(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais, turno)){
                         char exportar;
                         do {
-                            printf("\nExportar ficheiro do jogo? (S/N) ");
+                            printf("Exportar ficheiro do jogo? (S/N) ");
+                            fflush(stdin);
                             scanf("%c", &exportar);
 
                             if (exportar == 'N'){
@@ -167,7 +170,6 @@ int main(){
                 if(habilidade == 'E' && expandir > 0){
                     printf("Qual é o tipo de expansão que queres fazer? (L - Linha / C - Coluna): ");
                     scanf("\n%c", &tipo);
-                    printf("%d", linhasTotais);
                     if(tipo == 'L') linhasTotais += 1;
                     else if(tipo == 'C') colunasTotais += 1;
                     else break;
@@ -195,7 +197,7 @@ int main(){
                     scanf("%c", &guardar);
 
                     if (guardar == 'S'){
-                        guardaJogo(&linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
+                        guardaJogo(tabuleiro, linhasTotais, colunasTotais, turno, &jogadorA, &jogadorB);
                         break;
                     }
                     else if (guardar == 'N') break;

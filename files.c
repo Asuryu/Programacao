@@ -9,25 +9,34 @@
 #include "engine.h"
 
 
-int guardaJogo(int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B){
+int guardaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B){
     FILE *f;
     f = fopen("jogo.bin", "wb");
     if(f == NULL) return 0;
 
-    fwrite(linhas, sizeof(int), 1, f);
-    fwrite(colunas, sizeof(int), 1, f);
-    fwrite(turnos, sizeof(int), 1, f);
+    fwrite(&linhas, sizeof(int), 1, f);
+    fwrite(&colunas, sizeof(int), 1, f);
+    fwrite(&turnos, sizeof(int), 1, f);
     fwrite(A, sizeof(Jogador), 1, f);
     fwrite(B, sizeof(Jogador), 1, f);
 
     fclose(f);
+    return 1;
     
 }
 
-int recuperaJogo(int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B){
+int recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B){
     FILE *f;
     f = fopen("jogo.bin", "rb");
     if(f == NULL) return 0;
+
+    // printf("%c", tabuleiro[0][0]);
+
+    // for(int i = 0; i < linhas; ++i){
+    //     fread(tabuleiro[i], sizeof(tabuleiro[i][0]), linhas, f);
+    // }
+
+    // printf("%c", tabuleiro[0][0]);
 
     fread(linhas, sizeof(int), 1, f);
     fread(colunas, sizeof(int), 1, f);
@@ -36,9 +45,10 @@ int recuperaJogo(int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B)
     fread(B, sizeof(Jogador), 1, f);
 
     fclose(f);
+    return 1;
 }
 
-void exportarJogo(char *ficheiro){
+int exportarJogo(char *ficheiro){
     ficheiro[strlen(ficheiro) - 1] = '\0';
     char extension[5] = ".txt";
     strcat(ficheiro, extension);
@@ -49,4 +59,5 @@ void exportarJogo(char *ficheiro){
     if(f == NULL) return 0;
 
     fclose(f);
+    return 1;
 }

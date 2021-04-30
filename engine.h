@@ -15,7 +15,7 @@ typedef struct {
 // Retorna um double-pointer que aponta para o início do tabuleiro 
 //
 // Parâmetro (dim - Dimensão do tabuleiro)
-char **gerarTabuleiro(int dim);
+char **gerarTabuleiro(int linhas, int colunas);
 
 // Mostra o tabuleiro no estado atual
 // Pode servir para dar refresh depois de uma jogada

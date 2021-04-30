@@ -8,18 +8,18 @@
 #include "engine.h"
 #include "utils.h"
 
-char **gerarTabuleiro(int dim){
+char **gerarTabuleiro(int linhas, int colunas){
 
     char **tabuleiro;
  
-    tabuleiro = (char **)malloc(sizeof(char *)*dim); 
+    tabuleiro = (char **)malloc(sizeof(char *)*linhas); 
 
-    for(int i = 0; i < dim; i++){
-        tabuleiro[i] = (char *)malloc(sizeof(char)*dim);
+    for(int i = 0; i < linhas; i++){
+        tabuleiro[i] = (char *)malloc(sizeof(char)*colunas);
     }
 
-    for(int i = 0; i < dim; i++){
-        for(int j = 0; j < dim + 3; j++){
+    for(int i = 0; i < linhas; i++){
+        for(int j = 0; j < colunas; j++){
             tabuleiro[i][j] = '_';
         }
     }
@@ -59,10 +59,6 @@ int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int co
     if(linhas == colunas){
         for(int a = 0; a < linhas; a++){
             if(tabuleiro[a][a] != cor) diagonal = 0;
-            else diagonal += 1;
-        }
-        for(int b = 0; b < linhas; b++){
-            if(tabuleiro[b][linhas - b] != cor) diagonal = 0;
             else diagonal += 1;
         }
     }

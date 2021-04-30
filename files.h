@@ -12,7 +12,7 @@
 // Parâmetros (linhas - Ponteiro para o número de linhas total, colunas - Ponteiro para o número de colunas total)
 // Parâmetros (turnos - Ponteiro para a varíavel que nos indica o utilizador que ficou por jogar)
 // Parâmetros (A e B - Ponteiro para a estrutura que contém a informação do jogador A/B)
-int guardaJogo(int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
+int guardaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
 
 // Recupera um jogo anterior inacabado contido num ficheiro binário
 // Retorna o sucesso da operação (0 - Erro / 1 - Sucesso)
@@ -20,11 +20,12 @@ int guardaJogo(int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
 // Parâmetros (linhas - Ponteiro para a variável que vai guardar de linhas total, colunas - Ponteiro para a variável que vai guardar o número de colunas total)
 // Parâmetros (turnos - Ponteiro para a varíavel que vai guardar o utilizador que ficou por jogar)
 // Parâmetros (A e B - Ponteiro para a estrutura que vai guardar a informação do jogador A/B)
-int recuperaJogo(int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
+int recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
 
 // Guarda a sucesão do tabuleiro ao longo do jogo num ficheiro de texto
+// Retorna o sucesso da operação (0 - Erro / 1 - Sucesso)
 //
 // Parâmetros (ficheiro - Ponteiro para o array que contém o nome que o utiliador escolheu para o ficheiro)
-void exportarJogo(char *ficheiro);
+int exportarJogo(char *ficheiro);
 
 #endif /* FILES_H */

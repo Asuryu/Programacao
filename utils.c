@@ -74,9 +74,9 @@ void howToPlay(){
     mostrarASCII();
     printf("");
     printf("> O jogo do Semáforo é um jogo de tabuleiro entre 2 pessoas que efetuam jogadas alternadas ");
-    printf("até que uma delas vença ou que se verifique um empate\n\n");
+    printf("até que uma delas vença ou que se verifique um empate.\n\n");
     printf("> É gerado um tabuleiro quadrado com dimensão aleatória (entre 3 e 5 linhas) e cada jogador ");
-    printf("pode escolher jogar uma peça ou utilizar uma habilidade espcial.\n");
+    printf("pode escolher jogar uma peça ou utilizar uma habilidade especial.\n");
     printf("\nContinuar? (S/N) ");
     char continuar, continuar1;
     do {
@@ -88,7 +88,7 @@ void howToPlay(){
     } while (continuar != 'S' || continuar != 'N');
 
     mostrarASCII();
-    printf("> Alternadamente os jogadores vão colocando peças de cor\nVERDE (G), AMARELA (Y) e VERMELHA (R)\n\n");
+    printf("> Alternadamente, os jogadores vão colocando peças de cor\nVERDE (G), AMARELA (Y) ou VERMELHA (R)\n\n");
     printf("> Ganha o jogador que coloque uma peça que permita formar uma linha, coluna ou diagonal completa com peças da mesma cor\n");
     printf("\nContinuar? (S/N) ");
     do {
@@ -114,7 +114,7 @@ void howToPlay(){
     } while (continuar != 'S' || continuar != 'N');
 
     mostrarASCII();
-    printf("> Para além de jogarem peças, os jogadores podem também utilizar habilidades espciais:\n\n");
+    printf("> Para além de jogarem peças, os jogadores podem também utilizar habilidades especiais:\n\n");
     printf("1. Colocar uma pedra numa célula vazia (limitada a 1 por jogo)\n");
     printf("2. Adicionar uma nova linha ou coluna ao final do tabuleiro (limitada a 2 por jogo)\n");
     printf("\nContinuar? (S/N) ");
