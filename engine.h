@@ -10,6 +10,16 @@ typedef struct {
     int expandir;
 } Jogador;
 
+typedef struct objeto livro, *plivro;
+struct objeto
+{
+    char **tab;
+    int linhas;
+    int colunas;
+    int cota;
+    plivro prox;
+};
+
 // Gera um tabuleiro quadrado dinâmico do tipo char com a dimensão espcificada
 // Para além disso preenche o tabueleiro com "_" que representam o espaço vazio
 // Retorna um double-pointer que aponta para o início do tabuleiro 

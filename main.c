@@ -20,7 +20,38 @@
 #include "files.c"
 
 
-int main(){
+int mainAAA(){
+
+    initRandom();
+
+    plivro lista = NULL;
+    char **tabuleiro;
+    int randomDim;
+    int linhasTotais, colunasTotais;
+
+    randomDim = intUniformRnd(3, 5);
+    linhasTotais = randomDim;
+    colunasTotais = randomDim;
+    
+    tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
+    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0);
+
+    tabuleiro[0][0] = 'C';
+    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 1);
+
+    tabuleiro[1][1] = 'P';
+    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 2);
+
+
+    //mostra_info(lista);
+    printf("\n\n\n\n\n");
+    procura_cota(lista, 3);
+    liberta_lista(lista);
+
+    return 0;
+}
+
+int mainAAAA(){
 
     int flag = 0;
 
@@ -43,6 +74,7 @@ int main(){
     }
 
     initRandom();
+    plivro lista = NULL;
 
     Jogador jogadorA;
     Jogador jogadorB;
@@ -72,22 +104,18 @@ int main(){
         // LER DO FICHEIRO DO JOGO ANTERIOR
 
         // Carregar:
-        // 1. TABELA
+        // 1. Tabela
         // 2. LINHAS E COLUNAS
         // 3. TURNO
         // 4. JOGADORES
 
-        recuperaJogo(tabuleiro, &linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
-        printf("%d\n", linhasTotais);
-        printf("%d\n", colunasTotais);
-        scanf("%d", &randomDim);
-
-        tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
-
+        tabuleiro = recuperaJogo(tabuleiro, &linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
+        scanf("%d", randomDim);
     }
 
     int linha, coluna, pedras, expandir;
     char cor, escolha, habilidade, tipo;
+    int jogada = 0;
 
     do{
         mostrarASCII();
@@ -130,6 +158,8 @@ int main(){
 
                     }
                     else {
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
+                        jogada++;
                         if(turno == 0) turno = 1;
                         else turno = 0;
                     }
@@ -165,6 +195,8 @@ int main(){
                             jogadorB.pedras = pedras - 1;
                             turno = 0;
                         }
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
+                        jogada++;
                     }
                 }
                 if(habilidade == 'E' && expandir > 0){
@@ -184,6 +216,8 @@ int main(){
                         jogadorB.expandir = expandir - 1;
                         turno = 0;
                     }
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
+                    jogada++;
                 }
 
                 break;
@@ -192,6 +226,8 @@ int main(){
                 mostrarASCII();
                 printf("Antes de sair pretende guardar o jogo para retomar mais tarde?\n");
                 printf("\nGuardar? (S/N) ");
+                mostra_info(lista);
+                liberta_lista(lista);
                 char guardar;
                 do {
                     scanf("%c", &guardar);
