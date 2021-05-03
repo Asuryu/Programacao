@@ -43,10 +43,18 @@ void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas){
 }
 
 int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int colunas, int turno){
-    
+
+    int empate = 0;
     int horizontal = 0;
     int vertical = 0;
     int diagonal = 0;
+
+    for(int i = 0; i < linhas; i++){
+        for(int j = 0; j < colunas; j++){
+            if(tabuleiro[i][j] != '_') empate += 1;
+            else empate = 0;
+        }
+    }
 
     for(int i = 0; i < colunas; i++){
         if(tabuleiro[l-1][i] != cor) horizontal = 0;
@@ -61,6 +69,13 @@ int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int co
             if(tabuleiro[a][a] != cor) diagonal = 0;
             else diagonal += 1;
         }
+    }
+
+    if(empate == linhas * colunas){
+        mostrarASCII();
+        printf("\n*** O JOGO ACABOU NUM EMPATE! ***\nFica para a próxima!\n");
+        scanf("%c", &cor);
+        return 1;
     }
 
     if(horizontal == colunas){
@@ -194,13 +209,16 @@ void mostra_info(plivro p){
 }
 
 int procura_cota(plivro p, int c){
+
     while(p != NULL){
         if(p->cota == c){
             mostrarTabuleiro(p->tab, p->linhas, p->colunas);
             return 1;
         }
-        return 0;
+        else p = p->prox;
     }
+    return 0;
+
 }
 
 void preenche(plivro p, char **tabuleiro, int l, int c, int i){
@@ -241,31 +259,13 @@ plivro insere_final(plivro p, char **tabuleiro, int l, int c, int i){
     return p;
 }
 
-plivro insere_inicio(plivro p, char **tabuleiro, int l, int c, int i){
-    plivro novo;
-
-    novo = malloc(sizeof(livro));
-    if(novo == NULL) return p;
-    preenche(novo, tabuleiro, l, c, i);
-    novo->prox = p;
-    p = novo;
-    return p;
-}
-
-plivro elimina(plivro p, int c){
-    plivro atual, anterior = NULL;
-
-    atual = p;
-    while(atual != NULL && atual->cota != c){
-        anterior = atual;
-        atual = atual->prox;
+int nrElementos(plivro p){
+    int contador = 0;
+    while(p != NULL){
+        contador++;
+        p = p->prox;
     }
-    if(atual == NULL) return p;
-    if(anterior == NULL) p = atual->prox;
-    else anterior->prox = atual->prox;
-    
-    free(atual);
-    return p;
+    return contador - 1;
 }
 
 void liberta_lista(plivro p){
