@@ -14,45 +14,52 @@ int guardaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador
     f = fopen("jogo.bin", "wb");
     if(f == NULL) return 0;
 
+    int l, c;
+    l = linhas;
+    c = colunas;
+    
     fwrite(&linhas, sizeof(int), 1, f);
     fwrite(&colunas, sizeof(int), 1, f);
-    fwrite(&turnos, sizeof(int), 1, f);
     fwrite(A, sizeof(Jogador), 1, f);
     fwrite(B, sizeof(Jogador), 1, f);
+    fwrite(&turnos, sizeof(int), 1, f);
+    fwrite(tabuleiro, sizeof(char**), l * c, f);
 
     fclose(f);
     return 1;
     
 }
 
-int recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B){
+char **recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B){
     FILE *f;
     f = fopen("jogo.bin", "rb");
     if(f == NULL) return 0;
 
-    // printf("%c", tabuleiro[0][0]);
+    int l, c;
 
-    // for(int i = 0; i < linhas; ++i){
-    //     fread(tabuleiro[i], sizeof(tabuleiro[i][0]), linhas, f);
-    // }
-
-    // printf("%c", tabuleiro[0][0]);
-
-    fread(linhas, sizeof(int), 1, f);
-    fread(colunas, sizeof(int), 1, f);
-    fread(turnos, sizeof(int), 1, f);
+    fread(&l, sizeof(int), 1, f); *linhas = l;
+    fread(&c, sizeof(int), 1, f); *colunas = c;
     fread(A, sizeof(Jogador), 1, f);
     fread(B, sizeof(Jogador), 1, f);
+    fread(&turnos, sizeof(int), 1, f);
+    
+    tabuleiro = (char **)malloc(sizeof(char *)*l); 
+
+    for(int i = 0; i < l; i++){
+        tabuleiro[i] = (char *)malloc(sizeof(char)*c);
+    }
+        
+    fread(tabuleiro, sizeof(char**), l * c, f);
+    printf("asdasdsa%c", **(tabuleiro + 1));
 
     fclose(f);
-    return 1;
+    return tabuleiro;
 }
 
 int exportarJogo(char *ficheiro){
     ficheiro[strlen(ficheiro) - 1] = '\0';
     char extension[5] = ".txt";
     strcat(ficheiro, extension);
-    puts(ficheiro);
 
     FILE *f;
     f = fopen(ficheiro, "w+");

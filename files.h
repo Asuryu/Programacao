@@ -20,7 +20,7 @@ int guardaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador
 // Parâmetros (linhas - Ponteiro para a variável que vai guardar de linhas total, colunas - Ponteiro para a variável que vai guardar o número de colunas total)
 // Parâmetros (turnos - Ponteiro para a varíavel que vai guardar o utilizador que ficou por jogar)
 // Parâmetros (A e B - Ponteiro para a estrutura que vai guardar a informação do jogador A/B)
-int recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
+char **recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B);
 
 // Guarda a sucesão do tabuleiro ao longo do jogo num ficheiro de texto
 // Retorna o sucesso da operação (0 - Erro / 1 - Sucesso)
