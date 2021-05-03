@@ -1,13 +1,6 @@
 // Trabalho Pratico Programacao - LEI
 // DEIS-ISEC 2020-2021
 
-/////// VERIFICAR PELO EMPATE ///////
-/////// VERIFICAR PELO EMPATE ///////
-/////// VERIFICAR PELO EMPATE ///////
-/////// VERIFICAR PELO EMPATE ///////
-/////// VERIFICAR PELO EMPATE ///////
-/////// VERIFICAR PELO EMPATE ///////
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -45,13 +38,14 @@ int mainAAA(){
 
     //mostra_info(lista);
     printf("\n\n\n\n\n");
-    procura_cota(lista, 3);
+    //procura_cota(lista, 2);
+    printf("%d", nrElementos(lista));
     liberta_lista(lista);
 
     return 0;
 }
 
-int mainAAAA(){
+int main(){
 
     int flag = 0;
 
@@ -99,6 +93,7 @@ int mainAAAA(){
         colunasTotais = randomDim;
 
         tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
+        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0);
     
     } else {
         // LER DO FICHEIRO DO JOGO ANTERIOR
@@ -110,12 +105,13 @@ int mainAAAA(){
         // 4. JOGADORES
 
         tabuleiro = recuperaJogo(tabuleiro, &linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
+        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0);
         scanf("%d", randomDim);
     }
 
     int linha, coluna, pedras, expandir;
     char cor, escolha, habilidade, tipo;
-    int jogada = 0;
+    int jogada = 1;
 
     do{
         mostrarASCII();
@@ -124,7 +120,7 @@ int mainAAAA(){
         if(turno == 0) printf("\n[JOGADOR A]\n");
         else printf("\n[JOGADOR B]\n");
 
-        printf("Que jogada queres efetuar? (P - Peça / H - Habilidade / E - Sair): ");
+        printf("Que jogada queres efetuar? (P - Peça / H - Habilidade / T - Tabuleiro / E - Sair): ");
         scanf("%c", &escolha);
         switch(escolha){
             case 'P':
@@ -135,7 +131,7 @@ int mainAAAA(){
                     if(jogadaVencedora(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais, turno)){
                         char exportar;
                         do {
-                            printf("Exportar ficheiro do jogo? (S/N) ");
+                            printf("\nExportar ficheiro do jogo? (S/N) ");
                             fflush(stdin);
                             scanf("%c", &exportar);
 
@@ -195,6 +191,7 @@ int mainAAAA(){
                             jogadorB.pedras = pedras - 1;
                             turno = 0;
                         }
+                        
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
                         jogada++;
                     }
@@ -222,12 +219,45 @@ int mainAAAA(){
 
                 break;
 
+            case 'T':
+                mostrarASCII();
+                int k;
+                char continuar;
+                do {
+                    mostrarASCII();
+                    if(jogada == 1) k = 0;
+                    else if(jogada == 2) k = 1;
+                    else{
+                        printf("Qual o número de jogadas que quer recuar para visualizar? (1 - %d) ", nrElementos(lista));
+                        scanf("%d", &k);
+                        printf("\n");
+                    }
+
+                    if(procura_cota(lista, nrElementos(lista) - k)){
+                        
+                        do {
+                            printf("\nContinuar? (S/N) ");
+                            scanf("\n\n%c", &continuar);
+                            break;
+                        } while (continuar != 'S' || continuar != 'N');
+                        
+                        if(continuar == 'S') break;
+                    }
+
+                } while ((k > nrElementos(lista) || k <= 0) || continuar == 'N');
+
+                break;
+
             case 'E':
                 mostrarASCII();
                 printf("Antes de sair pretende guardar o jogo para retomar mais tarde?\n");
                 printf("\nGuardar? (S/N) ");
-                mostra_info(lista);
+                
+                printf("\n\n");
+                //mostra_info(lista);
+                procura_cota(lista, 0);
                 liberta_lista(lista);
+
                 char guardar;
                 do {
                     scanf("%c", &guardar);
