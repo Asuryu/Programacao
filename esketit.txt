@@ -1,24 +1,54 @@
 JOGADA 0
-_ _ _ 
-_ _ _ 
-_ _ _ 
+O tabuleiro foi iniciado com 5 linhas e 5 colunas
+_ _ _ _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
 
 
 JOGADA 1
-G _ _ 
-_ _ _ 
-_ _ _ 
+O jogador A colocou uma peça verde na posição (1, 1)
+G _ _ _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
 
 
 JOGADA 2
-G _ _ 
-_ G _ 
-_ _ _ 
+O jogador B colocou uma peça verde na posição (2, 2)
+G _ _ _ _ 
+_ G _ _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
 
 
 JOGADA 3
-G _ _ 
-_ G _ 
-_ _ G 
+O jogador A colocou uma peça verde na posição (3, 3)
+G _ _ _ _ 
+_ G _ _ _ 
+_ _ G _ _ 
+_ _ _ _ _ 
+_ _ _ _ _ 
+
+
+JOGADA 4
+O jogador B colocou uma peça verde na posição (4, 4)
+G _ _ _ _ 
+_ G _ _ _ 
+_ _ G _ _ 
+_ _ _ G _ 
+_ _ _ _ _ 
+
+
+JOGADA 5
+O jogador A colocou uma peça verde na posição (5, 5)
+G _ _ _ _ 
+_ G _ _ _ 
+_ _ G _ _ 
+_ _ _ G _ 
+_ _ _ _ G 
 
 
