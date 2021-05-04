@@ -27,13 +27,13 @@ int mainAAA(){
     colunasTotais = randomDim;
     
     tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
-    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0);
+    //lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0);
 
     tabuleiro[0][0] = 'C';
-    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 1);
+    //lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 1);
 
     tabuleiro[1][1] = 'P';
-    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 2);
+    //lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 2);
 
 
     //mostra_info(lista);
@@ -93,7 +93,7 @@ int main(){
         colunasTotais = randomDim;
 
         tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
-        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0);
+        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, NULL);
     
     } else {
         // LER DO FICHEIRO DO JOGO ANTERIOR
@@ -105,7 +105,7 @@ int main(){
         // 4. JOGADORES
 
         tabuleiro = recuperaJogo(tabuleiro, &linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
-        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0);
+        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, NULL);
         scanf("%d", randomDim);
     }
 
@@ -154,7 +154,7 @@ int main(){
 
                     }
                     else {
-                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, cor);
                         jogada++;
                         if(turno == 0) turno = 1;
                         else turno = 0;
@@ -192,7 +192,7 @@ int main(){
                             turno = 0;
                         }
                         
-                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, 'X');
                         jogada++;
                     }
                 }
@@ -213,7 +213,7 @@ int main(){
                         jogadorB.expandir = expandir - 1;
                         turno = 0;
                     }
-                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, 'E');
                     jogada++;
                 }
 

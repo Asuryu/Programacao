@@ -16,6 +16,8 @@ struct objeto
     char **tab;
     int linhas;
     int colunas;
+    int jogador;
+    char peçaJogada;
     int cota;
     plivro prox;
 };

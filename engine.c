@@ -176,18 +176,6 @@ char **expandirTabuleiro(char **tabuleiro, int linhas, int colunas, char tipo){
 
 }
 
-int nJogadasAnteriores(plivro p, int jogadaAtual, int n){
-    while(p != NULL){
-        if(p->cota == jogadaAtual - n){
-            mostrarTabuleiro(p->tab, p->linhas, p->colunas);
-            return 1;
-        }   
-    }
-    return 0;
-}
-
-
-
 
 
 
@@ -221,7 +209,7 @@ int procura_cota(plivro p, int c){
 
 }
 
-void preenche(plivro p, char **tabuleiro, int l, int c, int i){
+void preenche(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char cor){
     char **aux;
     aux = (char **)malloc(sizeof(char *)*l); 
 
@@ -238,16 +226,18 @@ void preenche(plivro p, char **tabuleiro, int l, int c, int i){
     p->tab = aux;
     p->linhas = l;
     p->colunas = c;
+    p->jogador = c;
+    p->peçaJogada = c;
     p->cota = i;
     p->prox = NULL;
 }
 
-plivro insere_final(plivro p, char **tabuleiro, int l, int c, int i){
+plivro insere_final(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char cor){
     plivro novo, aux;
 
     novo = malloc(sizeof(livro));
     if(novo == NULL) return p;
-    preenche(novo, tabuleiro, l, c, i);
+    preenche(novo, tabuleiro, l, c, i, jogador, cor);
 
     if(p == NULL) p = novo;
     else {
