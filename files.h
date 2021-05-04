@@ -26,6 +26,6 @@ char **recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jo
 // Retorna o sucesso da operação (0 - Erro / 1 - Sucesso)
 //
 // Parâmetros (ficheiro - Ponteiro para o array que contém o nome que o utiliador escolheu para o ficheiro)
-int exportarJogo(char *ficheiro);
+//int exportarJogo(char *ficheiro);
 
 #endif /* FILES_H */

@@ -48,16 +48,10 @@ int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int co
     int horizontal = 0;
     int vertical = 0;
     int diagonal = 0;
-
-    for(int i = 0; i < linhas; i++){
-        for(int j = 0; j < colunas; j++){
-            if(tabuleiro[i][j] != '_') empate += 1;
-            else empate = 0;
-        }
-    }
+    int diagonalX = 0;
 
     for(int i = 0; i < colunas; i++){
-        if(tabuleiro[l-1][i] != cor) horizontal = 0;
+        if(tabuleiro[l - 1][i] != cor) horizontal = 0;
         else horizontal += 1;
     }
     for(int j = 0; j < linhas; j++){
@@ -68,6 +62,16 @@ int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int co
         for(int a = 0; a < linhas; a++){
             if(tabuleiro[a][a] != cor) diagonal = 0;
             else diagonal += 1;
+        }
+        for(int a = 0; a < linhas; a++){
+            if(tabuleiro[a][colunas - a - 1] != cor) diagonalX = 0;
+            else diagonalX += 1;
+        }
+    }
+    for(int i = 0; i < linhas; i++){
+        for(int j = 0; j < colunas; j++){
+            if(tabuleiro[i][j] != '_') empate += 1;
+            else empate = 0;
         }
     }
 
@@ -92,7 +96,7 @@ int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int co
         scanf("%c", &cor);
         return 1;
     }
-    else if(diagonal == linhas){
+    else if(diagonal == linhas || diagonalX == linhas){
         mostrarASCII();
         if(turno == 0) printf("\n*** O JOGADOR A É O VENCEDOR DO JOGO! ***\nDiagonal preenchida!\n");
         else printf("\n*** O JOGADOR B É O VENCEDOR DO JOGO! ***\nDiagonal preenchida!\n");

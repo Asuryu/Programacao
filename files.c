@@ -56,7 +56,7 @@ char **recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jo
     return tabuleiro;
 }
 
-int exportarJogo(char *ficheiro){
+int exportarJogo(char *ficheiro, plivro p){
     ficheiro[strlen(ficheiro) - 1] = '\0';
     char extension[5] = ".txt";
     strcat(ficheiro, extension);
@@ -64,6 +64,24 @@ int exportarJogo(char *ficheiro){
     FILE *f;
     f = fopen(ficheiro, "w+");
     if(f == NULL) return 0;
+
+    int l, c, cota;
+    while(p != NULL){
+        char **tabuleiro = p->tab;
+        cota = p->cota;
+        l = p->linhas;
+        c = p->colunas;
+
+        fprintf(f, "JOGADA %d\n", cota);
+        for(int i = 0; i < l; i++){
+            for(int j = 0; j < c; j++){
+                fprintf(f, "%c ", tabuleiro[i][j]);
+            }
+            fprintf(f, "\n");
+        }
+        fprintf(f, "\n\n");
+        p = p->prox;
+    }
 
     fclose(f);
     return 1;
