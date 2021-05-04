@@ -9,51 +9,37 @@
 #include "engine.h"
 
 
-int guardaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B){
+int guardaJogo(plivro p, Jogador *A, Jogador *B){
     FILE *f;
     f = fopen("jogo.bin", "wb");
     if(f == NULL) return 0;
-
-    int l, c;
-    l = linhas;
-    c = colunas;
     
-    fwrite(&linhas, sizeof(int), 1, f);
-    fwrite(&colunas, sizeof(int), 1, f);
+    fwrite(p, sizeof(plivro), 1, f);
     fwrite(A, sizeof(Jogador), 1, f);
     fwrite(B, sizeof(Jogador), 1, f);
-    fwrite(&turnos, sizeof(int), 1, f);
-    fwrite(tabuleiro, sizeof(char**), l * c, f);
 
     fclose(f);
     return 1;
     
 }
 
-char **recuperaJogo(char **tabuleiro, int *linhas, int *colunas, int *turnos, Jogador *A, Jogador *B){
+int recuperaJogo(plivro p, Jogador *A, Jogador *B){
     FILE *f;
     f = fopen("jogo.bin", "rb");
     if(f == NULL) return 0;
 
-    int l, c;
-
-    fread(&l, sizeof(int), 1, f); *linhas = l;
-    fread(&c, sizeof(int), 1, f); *colunas = c;
+    fread(p, sizeof(plivro), 1, f);
     fread(A, sizeof(Jogador), 1, f);
     fread(B, sizeof(Jogador), 1, f);
-    fread(&turnos, sizeof(int), 1, f);
-    
-    tabuleiro = (char **)malloc(sizeof(char *)*l); 
 
-    for(int i = 0; i < l; i++){
-        tabuleiro[i] = (char *)malloc(sizeof(char)*c);
-    }
-        
-    fread(tabuleiro, sizeof(char**), l * c, f);
-    printf("asdasdsa%c", **(tabuleiro + 1));
+    printf("%d", p->linhas);
+    printf("%d", A->expandir);
+    printf("%d", A->pedras);
+    printf("%d", B->pedras);
+    printf("%d", B->expandir);
 
     fclose(f);
-    return tabuleiro;
+    return 1;
 }
 
 int exportarJogo(char *ficheiro, plivro p){
@@ -65,14 +51,31 @@ int exportarJogo(char *ficheiro, plivro p){
     f = fopen(ficheiro, "w+");
     if(f == NULL) return 0;
 
-    int l, c, cota;
+    int l, c, cota, turno, lJogada, cJogada;
+    char cor, nome;
     while(p != NULL){
         char **tabuleiro = p->tab;
         cota = p->cota;
         l = p->linhas;
         c = p->colunas;
+        turno = p->jogador;
+        cor = p->peçaJogada;
+        lJogada = p->linhaJogada;
+        cJogada = p->colunaJogada;
 
         fprintf(f, "JOGADA %d\n", cota);
+        if(turno == 0) nome = 'A';
+        else if(turno == 1) nome = 'B';
+        else nome = NULL;
+
+        if(cor == NULL || nome == NULL) fprintf(f, "O tabuleiro foi iniciado com %d linhas e %d colunas\n", l, c);
+        else if(cor == 'X') fprintf(f, "O jogador %c colocou uma pedra na posição (%d, %d)\n", nome, lJogada, cJogada);
+        else if(cor == 'E') fprintf(f, "O jogador %c expandiu o tabuleiro\n", nome);
+        else if(cor == 'G') fprintf(f, "O jogador %c colocou uma peça verde na posição (%d, %d)\n", nome, lJogada, cJogada);
+        else if(cor == 'Y') fprintf(f, "O jogador %c colocou uma peça amarela na posição (%d, %d)\n", nome, lJogada, cJogada);
+        else if(cor == 'R') fprintf(f, "O jogador %c colocou uma peça vermelha na posição (%d, %d)\n", nome, lJogada, cJogada);
+        else fprintf(f, "O jogador %c fez uma jogada inesperada que o programa não estava à espera!\n", nome, lJogada, cJogada);
+
         for(int i = 0; i < l; i++){
             for(int j = 0; j < c; j++){
                 fprintf(f, "%c ", tabuleiro[i][j]);
