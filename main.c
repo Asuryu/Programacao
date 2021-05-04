@@ -8,6 +8,7 @@
 #include "utils.h"
 #include "engine.h"
 #include "files.h"
+
 #include "utils.c"
 #include "engine.c"
 #include "files.c"
@@ -129,6 +130,9 @@ int main(){
 
                 if(colocarPeca(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais)){
                     if(jogadaVencedora(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais, turno)){
+                        
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
+
                         char exportar;
                         do {
                             printf("\nExportar ficheiro do jogo? (S/N) ");
@@ -148,7 +152,7 @@ int main(){
                         printf("\nIntroduza um nome para o ficheiro\n>> ");
                         fflush(stdin);
                         fgets(fname, 30, stdin);
-                        exportarJogo(fname);
+                        exportarJogo(fname, lista);
                         free(tabuleiro);
                         exit(0);
 
