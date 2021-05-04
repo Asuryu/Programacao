@@ -1,6 +1,14 @@
 // Trabalho Pratico Programacao - LEI
 // DEIS-ISEC 2020-2021
 
+// GUARDAR A STRUCT NUM BINARY FILE
+// GUARDAR A STRUCT NUM BINARY FILE
+// GUARDAR A STRUCT NUM BINARY FILE
+
+// FAZER UM JOGADOR AUTOMÁTICO
+// FAZER UM JOGADOR AUTOMÁTICO
+// FAZER UM JOGADOR AUTOMÁTICO
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -13,38 +21,6 @@
 #include "engine.c"
 #include "files.c"
 
-
-int mainAAA(){
-
-    initRandom();
-
-    plivro lista = NULL;
-    char **tabuleiro;
-    int randomDim;
-    int linhasTotais, colunasTotais;
-
-    randomDim = intUniformRnd(3, 5);
-    linhasTotais = randomDim;
-    colunasTotais = randomDim;
-    
-    tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
-    //lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0);
-
-    tabuleiro[0][0] = 'C';
-    //lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 1);
-
-    tabuleiro[1][1] = 'P';
-    //lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 2);
-
-
-    //mostra_info(lista);
-    printf("\n\n\n\n\n");
-    //procura_cota(lista, 2);
-    printf("%d", nrElementos(lista));
-    liberta_lista(lista);
-
-    return 0;
-}
 
 int main(){
 
@@ -69,8 +45,8 @@ int main(){
     }
 
     initRandom();
-    plivro lista = NULL;
 
+    plivro lista = NULL;
     Jogador jogadorA;
     Jogador jogadorB;
 
@@ -94,7 +70,7 @@ int main(){
         colunasTotais = randomDim;
 
         tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
-        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, NULL);
+        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, NULL, NULL, NULL);
     
     } else {
         // LER DO FICHEIRO DO JOGO ANTERIOR
@@ -105,8 +81,8 @@ int main(){
         // 3. TURNO
         // 4. JOGADORES
 
-        tabuleiro = recuperaJogo(tabuleiro, &linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
-        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, NULL);
+        //tabuleiro = recuperaJogo(tabuleiro, &linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
+        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, NULL, NULL, NULL);
         scanf("%d", randomDim);
     }
 
@@ -131,7 +107,7 @@ int main(){
                 if(colocarPeca(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais)){
                     if(jogadaVencedora(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais, turno)){
                         
-                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada);
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, cor, linha, coluna);
 
                         char exportar;
                         do {
@@ -158,7 +134,7 @@ int main(){
 
                     }
                     else {
-                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, cor);
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, cor, linha, coluna);
                         jogada++;
                         if(turno == 0) turno = 1;
                         else turno = 0;
@@ -196,7 +172,7 @@ int main(){
                             turno = 0;
                         }
                         
-                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, 'X');
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, 'X', linha, coluna);
                         jogada++;
                     }
                 }
@@ -217,7 +193,7 @@ int main(){
                         jogadorB.expandir = expandir - 1;
                         turno = 0;
                     }
-                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, 'E');
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, 'E', NULL, NULL);
                     jogada++;
                 }
 
@@ -256,23 +232,20 @@ int main(){
                 mostrarASCII();
                 printf("Antes de sair pretende guardar o jogo para retomar mais tarde?\n");
                 printf("\nGuardar? (S/N) ");
-                
-                printf("\n\n");
-                //mostra_info(lista);
-                procura_cota(lista, 0);
-                liberta_lista(lista);
 
                 char guardar;
                 do {
                     scanf("%c", &guardar);
 
                     if (guardar == 'S'){
-                        guardaJogo(tabuleiro, linhasTotais, colunasTotais, turno, &jogadorA, &jogadorB);
+                        //guardaJogo(lista, &jogadorA, &jogadorB);
                         break;
                     }
                     else if (guardar == 'N') break;
 
                 } while (guardar != 'S' || guardar != 'N');
+                
+                liberta_lista(lista);
                 free(tabuleiro);
                 exit(0);
 
