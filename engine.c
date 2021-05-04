@@ -213,7 +213,7 @@ int procura_cota(plivro p, int c){
 
 }
 
-void preenche(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char cor){
+void preenche(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char cor, int lJogada, int cJogada){
     char **aux;
     aux = (char **)malloc(sizeof(char *)*l); 
 
@@ -230,18 +230,20 @@ void preenche(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char
     p->tab = aux;
     p->linhas = l;
     p->colunas = c;
-    p->jogador = c;
-    p->peçaJogada = c;
+    p->linhaJogada = lJogada;
+    p->colunaJogada = cJogada;
+    p->jogador = jogador;
+    p->peçaJogada = cor;
     p->cota = i;
     p->prox = NULL;
 }
 
-plivro insere_final(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char cor){
+plivro insere_final(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char cor, int lJogada, int cJogada){
     plivro novo, aux;
 
     novo = malloc(sizeof(livro));
     if(novo == NULL) return p;
-    preenche(novo, tabuleiro, l, c, i, jogador, cor);
+    preenche(novo, tabuleiro, l, c, i, jogador, cor, lJogada, cJogada);
 
     if(p == NULL) p = novo;
     else {

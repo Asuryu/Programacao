@@ -18,6 +18,7 @@ struct objeto
     int colunas;
     int jogador;
     char peçaJogada;
+    int linhaJogada, colunaJogada;
     int cota;
     plivro prox;
 };
