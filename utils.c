@@ -43,7 +43,7 @@ void mostrarASCII(){
 
 void howToPlay();
 
-void menu(){
+int menu(){
 
     mostrarASCII();
     int escolha;
@@ -54,19 +54,12 @@ void menu(){
 
     printf("Opção: ");
     scanf("%d", &escolha);
-    
-    switch (escolha){
-        case 1:
-            break;
-        case 2:
-            menu();
-        case 3:
-            howToPlay();
-        case 0:
-            exit(0);
-        default:
-            menu();
-    }
+
+    if(escolha == 1) return 0;
+    else if(escolha == 2) return 1;
+    else if(escolha == 3) howToPlay();
+    else if(escolha == 0) exit(0);
+    else menu();
 
 }
 

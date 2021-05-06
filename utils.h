@@ -25,6 +25,6 @@ void mostrarASCII();
 void howToPlay();
 
 // Mostra um menu principal onde o jogador pode escolher o que quer fazer
-void menu();
+int menu();
 
 #endif /* UTILS_H */
