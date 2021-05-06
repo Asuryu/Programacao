@@ -183,9 +183,6 @@ char **expandirTabuleiro(char **tabuleiro, int linhas, int colunas, char tipo){
 
 
 
-
-
-
 // LINKED LIST
 
 int lista_vazia(plivro p){
@@ -233,7 +230,7 @@ void preenche(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char
     p->linhaJogada = lJogada;
     p->colunaJogada = cJogada;
     p->jogador = jogador;
-    p->peçaJogada = cor;
+    p->pecaJogada = cor;
     p->cota = i;
     p->prox = NULL;
 }
