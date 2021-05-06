@@ -106,7 +106,7 @@ int main(){
         // 4. JOGADORES
 
         lista = recuperaJogo();
-        printf("%d", lista->colunas);
+        //printf("%d", lista->colunas);
         
         
 
