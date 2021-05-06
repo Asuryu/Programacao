@@ -119,7 +119,7 @@ int main(){
 
     }
 
-    int linha, coluna, pedras, expandir;
+    int linha, coluna, pedras, expandir, jogadaAleatoria, l, c, cr;
     char cor, escolha, habilidade, tipo;
     int jogada = 1;
 
@@ -132,7 +132,20 @@ int main(){
             else printf("\n[JOGADOR B]\n");
         } else if(computador == 1) {
             if(turno == 0) printf("\n[JOGADOR A]\n");
-            else printf("\n[COMPUTADOR]\n");
+            else{
+                //printf("\n[COMPUTADOR]\n");
+                do{
+                    jogadaAleatoria = 3;
+                } while(verificaJogadaCPU(tabuleiro, linhasTotais, colunasTotais, jogadaAleatoria, &jogadorB) == 0);
+                
+                mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+                if(jogadaAleatoria == 1) printf("Usou uma peça");
+                else if(jogadaAleatoria == 2) printf("Usou uma pedra");
+                else if(jogadaAleatoria == 3) printf("Usou uma expansão");
+                
+                scanf("%d", &randomDim);
+                turno = 0;
+            }
         }
 
         printf("Que jogada queres efetuar? (P - Peça / H - Habilidade / T - Tabuleiro / E - Sair): ");

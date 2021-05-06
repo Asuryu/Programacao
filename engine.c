@@ -30,7 +30,7 @@ char **gerarTabuleiro(int linhas, int colunas){
 
 void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas){
 
-    //mostrarASCII();
+    mostrarASCII();
     for(int i = 0; i < linhas; i++){
         for(int j = 0; j < colunas; j++){
             printf("%c ", tabuleiro[i][j]);
@@ -120,14 +120,12 @@ int colocarPeca(char **tabuleiro, char cor, int l, int c, int linhas, int coluna
                 tabuleiro[l - 1][c - 1] = 'X';
                 return 1;
             }
-            printf("Não podes colocar uma PEDRA nessa posição\n");
             return 0;
         case 'G':
             if(tabuleiro[l - 1][c - 1] == '_'){
                 tabuleiro[l - 1][c - 1] = 'G';
                 return 1;
             }
-            printf("Não podes colocar a peça VERDE nessa posição\n");
             return 0;
 
         case 'Y':
@@ -135,7 +133,6 @@ int colocarPeca(char **tabuleiro, char cor, int l, int c, int linhas, int coluna
                 tabuleiro[l - 1][c - 1] = 'Y';
                 return 1;
             }
-            printf("Não podes colocar a peça AMARELA nessa posição\n");
             return 0;
 
         case 'R':
@@ -143,11 +140,9 @@ int colocarPeca(char **tabuleiro, char cor, int l, int c, int linhas, int coluna
                 tabuleiro[l - 1][c - 1] = 'R';
                 return 1;
             }
-            printf("Não podes colocar a peça VERMELHA nessa posição\n");
             return 0;
 
         default:
-            printf("Escolhe uma cor válida para jogares\n");
             return 0;
     }
 
@@ -177,6 +172,66 @@ char **expandirTabuleiro(char **tabuleiro, int linhas, int colunas, char tipo){
     }
 
     return tabuleiro;
+
+}
+
+int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, Jogador *B){
+
+    int pedras = B->pedras;
+    int expandir = B->expandir;
+
+    if(indicador == 1){
+        for(int i = 0; i < linhas; i++){
+            for(int j = 0; j < colunas; j++){
+                if(tabuleiro[i][j] == '_'){
+                    colocarPeca(tabuleiro, 'G', i+1, j+1, linhas, colunas);
+                    return 1;
+                }
+                else if(tabuleiro[i][j] == 'G'){
+                    colocarPeca(tabuleiro, 'Y', i+1, j+1, linhas, colunas); 
+                    return 1;
+                }
+                else if(tabuleiro[i][j] == 'Y'){
+                    colocarPeca(tabuleiro, 'R', i+1, j+1, linhas, colunas); 
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+
+    else if(indicador == 2){
+        if(pedras > 0){
+            for(int i = 0; i < linhas; i++){
+                for(int j = 0; j < colunas; j++){
+                    if(tabuleiro[i][j] == '_'){
+                        colocarPeca(tabuleiro, 'X', i+1, j+1, linhas, colunas);
+                        return 1;
+                    }
+                }
+            }
+            return 0;
+        }
+        else return 0;
+    }
+
+    else if(indicador == 3){
+        printf("%d %d", linhas, colunas);
+        if(expandir > 0){
+            int escolhaExp = intUniformRnd(1, 2);
+            if(escolhaExp == 1){
+                tabuleiro = expandirTabuleiro(tabuleiro, linhas, colunas + 1, 'C');
+                return 1;
+            }
+            if(escolhaExp == 2){
+                tabuleiro = expandirTabuleiro(tabuleiro, linhas, colunas + 1, 'C');
+                return 1;
+            }
+        }
+        else return 0;
+    }
+
+    else return 0;
 
 }
 
