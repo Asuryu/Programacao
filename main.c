@@ -22,6 +22,27 @@
 #include "files.c"
 
 
+int mainAAA(){
+    char **tabuleiro;
+    plivro lista = NULL;
+
+    tabuleiro = gerarTabuleiro(4, 4);
+    tabuleiro[1][1] = 'X';
+    lista = insere_final(lista, tabuleiro, 4, 4, 0, NULL, NULL, NULL, NULL);
+    tabuleiro[1][2] = 'X';
+    lista = insere_final(lista, tabuleiro, 4, 4, 0, NULL, NULL, NULL, NULL);
+    //guardaJogo(lista, 2);
+    //recuperaJogo();
+
+    while(lista != NULL){
+        printf("%d\n\n", lista->colunas);
+        mostrarTabuleiro(lista->tab, lista->linhas, lista->colunas);
+        lista = lista->prox;
+    }
+
+    return 0;
+}
+
 int main(){
 
     int flag = 0;
@@ -51,11 +72,14 @@ int main(){
     Jogador jogadorB;
 
     int randomDim;
-    int linhasTotais, colunasTotais, turno;
+    int computador;
+    int linhasTotais, colunasTotais, turno = 0;
     char **tabuleiro;
 
     if(flag == 0){
-        menu();
+
+        if(menu() == 0) computador = 0;
+        else computador = 1;
 
         jogadorA.nome = 'A';
         jogadorA.pedras = 1;
@@ -81,9 +105,18 @@ int main(){
         // 3. TURNO
         // 4. JOGADORES
 
-        //tabuleiro = recuperaJogo(tabuleiro, &linhasTotais, &colunasTotais, &turno, &jogadorA, &jogadorB);
-        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, NULL, NULL, NULL);
-        scanf("%d", randomDim);
+        lista = recuperaJogo();
+        printf("%d", lista->colunas);
+        
+        
+
+        //tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais);
+        //tabuleiro = lista->tab;
+
+        //mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+
+        return 0;
+
     }
 
     int linha, coluna, pedras, expandir;
@@ -94,8 +127,13 @@ int main(){
         mostrarASCII();
         mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
 
-        if(turno == 0) printf("\n[JOGADOR A]\n");
-        else printf("\n[JOGADOR B]\n");
+        if(computador == 0){
+            if(turno == 0) printf("\n[JOGADOR A]\n");
+            else printf("\n[JOGADOR B]\n");
+        } else if(computador == 1) {
+            if(turno == 0) printf("\n[JOGADOR A]\n");
+            else printf("\n[COMPUTADOR]\n");
+        }
 
         printf("Que jogada queres efetuar? (P - Peça / H - Habilidade / T - Tabuleiro / E - Sair): ");
         scanf("%c", &escolha);
@@ -238,7 +276,7 @@ int main(){
                     scanf("%c", &guardar);
 
                     if (guardar == 'S'){
-                        //guardaJogo(lista, &jogadorA, &jogadorB);
+                        guardaJogo(lista);
                         break;
                     }
                     else if (guardar == 'N') break;
