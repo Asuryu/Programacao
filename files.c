@@ -9,37 +9,34 @@
 #include "engine.h"
 
 
-int guardaJogo(plivro p, Jogador *A, Jogador *B){
+int guardaJogo(plivro p){
     FILE *f;
     f = fopen("jogo.bin", "wb");
     if(f == NULL) return 0;
-    
-    fwrite(p, sizeof(plivro), 1, f);
-    fwrite(A, sizeof(Jogador), 1, f);
-    fwrite(B, sizeof(Jogador), 1, f);
 
+    while(p != NULL){
+        fwrite(p, sizeof(plivro), 1, f);
+        p = p->prox;
+    }
+    
     fclose(f);
     return 1;
     
 }
 
-int recuperaJogo(plivro p, Jogador *A, Jogador *B){
+plivro recuperaJogo(){
     FILE *f;
+    livro *p = NULL, novo;
+
     f = fopen("jogo.bin", "rb");
     if(f == NULL) return 0;
 
-    fread(p, sizeof(plivro), 1, f);
-    fread(A, sizeof(Jogador), 1, f);
-    fread(B, sizeof(Jogador), 1, f);
-
-    printf("%d", p->linhas);
-    printf("%d", A->expandir);
-    printf("%d", A->pedras);
-    printf("%d", B->pedras);
-    printf("%d", B->expandir);
+    while(fread(&novo, sizeof(livro), 1, f) > 0){
+        p = insere_final(&novo, &novo.tab, &novo.linhas, &novo.colunas, &novo.cota, &novo.jogador, &novo.pecaJogada, &novo.linhaJogada, &novo.colunaJogada);
+    }
 
     fclose(f);
-    return 1;
+    return p;
 }
 
 int exportarJogo(char *ficheiro, plivro p){
@@ -53,13 +50,15 @@ int exportarJogo(char *ficheiro, plivro p){
 
     int l, c, cota, turno, lJogada, cJogada;
     char cor, nome;
+    char **tabuleiro;
     while(p != NULL){
-        char **tabuleiro = p->tab;
+        p = p->prox;
+        tabuleiro = p->tab;
         cota = p->cota;
         l = p->linhas;
         c = p->colunas;
         turno = p->jogador;
-        cor = p->peçaJogada;
+        cor = p->pecaJogada;
         lJogada = p->linhaJogada;
         cJogada = p->colunaJogada;
 
