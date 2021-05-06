@@ -75,7 +75,7 @@ void howToPlay(){
     do {
         scanf("%c", &continuar);
 
-        if (continuar == 'N') main();
+        if (continuar == 'N') menu();
         else if (continuar == 'S') break;
 
     } while (continuar != 'S' || continuar != 'N');
@@ -87,7 +87,7 @@ void howToPlay(){
     do {
         scanf("%c", &continuar1);
 
-        if (continuar1 == 'N') main();
+        if (continuar1 == 'N') menu();
         else if (continuar1 == 'S') break;
 
     } while (continuar1 != 'S' || continuar1 != 'N');
@@ -101,7 +101,7 @@ void howToPlay(){
     do {
         scanf("\n%c", &continuar);
 
-        if (continuar == 'N') main();
+        if (continuar == 'N') menu();
         else if (continuar == 'S') break;
 
     } while (continuar != 'S' || continuar != 'N');
@@ -114,8 +114,8 @@ void howToPlay(){
     do {
         scanf("%c", &continuar);
 
-        if (continuar == 'N') main();
-        else if (continuar == 'S') main();
+        if (continuar == 'N') menu();
+        else if (continuar == 'S') menu();
 
     } while (continuar != 'S' || continuar != 'N');
 
