@@ -15,7 +15,7 @@ int guardaJogo(plivro p){
     if(f == NULL) return 0;
 
     while(p != NULL){
-        fwrite(p, sizeof(plivro), 1, f);
+        fwrite(p, sizeof(livro), 1, f);
         p = p->prox;
     }
     
@@ -31,8 +31,20 @@ plivro recuperaJogo(){
     f = fopen("jogo.bin", "rb");
     if(f == NULL) return 0;
 
-    while(fread(&novo, sizeof(livro), 1, f) > 0){
-        p = insere_final(&novo, &novo.tab, &novo.linhas, &novo.colunas, &novo.cota, &novo.jogador, &novo.pecaJogada, &novo.linhaJogada, &novo.colunaJogada);
+    char **tabuleiro;
+    tabuleiro = gerarTabuleiro(5, 5);
+    
+    while(fread(&novo, sizeof(livro), 1, f) > 0){ //Retorna o número de elementos como esperado
+        printf("%c ", novo.tab);
+        printf("%d ", novo.linhas);
+        printf("%d ", novo.colunas);
+        printf("%d ", novo.cota);
+        printf("%d ", novo.jogador);
+        printf("%c ", novo.pecaJogada);
+        printf("%d ", novo.linhaJogada);
+        printf("%d ", novo.colunaJogada);
+        printf("\n\n");
+        p = insere_final(p, novo.tab, novo.linhas, novo.colunas, novo.cota, novo.jogador, 'G', novo.linhaJogada, novo.colunaJogada);
     }
 
     fclose(f);
