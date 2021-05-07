@@ -16,6 +16,7 @@ int guardaJogo(plivro p){
 
     while(p != NULL){
         fwrite(p, sizeof(livro), 1, f);
+        mostrarTabuleiro(p->tab, p->linhas, p->colunas);
         p = p->prox;
     }
     
@@ -44,7 +45,7 @@ plivro recuperaJogo(){
         printf("%d ", novo.linhaJogada);
         printf("%d ", novo.colunaJogada);
         printf("\n\n");
-        p = insere_final(p, novo.tab, novo.linhas, novo.colunas, novo.cota, novo.jogador, 'G', novo.linhaJogada, novo.colunaJogada);
+        //p = insere_final(&novo, novo.tab, novo.linhas, novo.colunas, novo.cota, novo.jogador, 'G', novo.linhaJogada, novo.colunaJogada);
     }
 
     fclose(f);
