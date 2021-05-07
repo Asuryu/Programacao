@@ -36,14 +36,14 @@ plivro recuperaJogo(){
     tabuleiro = gerarTabuleiro(5, 5);
     
     while(fread(&novo, sizeof(livro), 1, f) > 0){ //Retorna o número de elementos como esperado
-        printf("%c ", novo.tab);
-        printf("%d ", novo.linhas);
-        printf("%d ", novo.colunas);
-        printf("%d ", novo.cota);
-        printf("%d ", novo.jogador);
-        printf("%c ", novo.pecaJogada);
-        printf("%d ", novo.linhaJogada);
-        printf("%d ", novo.colunaJogada);
+        printf("Tabuleiro: %c ", novo.tab);
+        printf("LinhasT: %d ", novo.linhas);
+        printf("ColunasT: %d ", novo.colunas);
+        printf("Cota: %d ", novo.cota);
+        printf("Jogador: %d ", novo.jogador);
+        printf("Peça: %c ", novo.pecaJogada);
+        printf("LinhaJ: %d ", novo.linhaJogada);
+        printf("ColunaJ: %d ", novo.colunaJogada);
         printf("\n\n");
         //p = insere_final(&novo, novo.tab, novo.linhas, novo.colunas, novo.cota, novo.jogador, 'G', novo.linhaJogada, novo.colunaJogada);
     }
