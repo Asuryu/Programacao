@@ -46,7 +46,7 @@ void howToPlay();
 int menu(){
 
     mostrarASCII();
-    int escolha;
+    int escolha = - 1;
     printf("1 - Jogador vs Jogador\n");
     printf("2 - Jogador vs Computador\n");
     printf("3 - Instruções de como jogar\n");
@@ -61,6 +61,7 @@ int menu(){
     else if(escolha == 0) exit(0);
     else menu();
 
+    menu();
 }
 
 void howToPlay(){
@@ -69,54 +70,62 @@ void howToPlay(){
     printf("> O jogo do Semáforo é um jogo de tabuleiro entre 2 pessoas que efetuam jogadas alternadas ");
     printf("até que uma delas vença ou que se verifique um empate.\n\n");
     printf("> É gerado um tabuleiro quadrado com dimensão aleatória (entre 3 e 5 linhas) e cada jogador ");
-    printf("pode escolher jogar uma peça ou utilizar uma habilidade especial.\n");
-    printf("\nContinuar? (S/N) ");
-    char continuar, continuar1;
+    printf("pode escolher jogar uma peça ou utilizar uma habilidade especial.\n\n");
+    char continuar;
     do {
-        scanf("%c", &continuar);
+        printf("Continuar1? (S/N) ");
+        scanf("\n%c", &continuar);
 
-        if (continuar == 'N') menu();
+        if (continuar == 'N') break;
         else if (continuar == 'S') break;
 
     } while (continuar != 'S' || continuar != 'N');
 
+    if (continuar == 'N') return;
+
     mostrarASCII();
     printf("> Alternadamente, os jogadores vão colocando peças de cor\nVERDE (G), AMARELA (Y) ou VERMELHA (R)\n\n");
-    printf("> Ganha o jogador que coloque uma peça que permita formar uma linha, coluna ou diagonal completa com peças da mesma cor\n");
-    printf("\nContinuar? (S/N) ");
+    printf("> Ganha o jogador que coloque uma peça que permita formar uma linha, coluna ou diagonal completa com peças da mesma cor\n\n");
     do {
-        scanf("%c", &continuar1);
+        printf("Continuar2? (S/N) ");
+        scanf("\n%c", &continuar);
 
-        if (continuar1 == 'N') menu();
-        else if (continuar1 == 'S') break;
+        if (continuar == 'N') break;
+        else if (continuar == 'S') break;
 
-    } while (continuar1 != 'S' || continuar1 != 'N');
+    } while (continuar != 'S' || continuar != 'N');
+
+    if (continuar == 'N') return;
 
     mostrarASCII();
     printf("> As jogadas válidas relativas a colocar uma peça são as seguintes:\n\n");
     printf("1. Colocar uma peça VERDE numa célula vazia\n");
     printf("2. Trocar uma peça VERDE por uma peça AMARELA\n");
-    printf("3. Trocar uma peça AMARELA por uma peça VERMELHA\n");
-    printf("\nContinuar? (S/N) ");
+    printf("3. Trocar uma peça AMARELA por uma peça VERMELHA\n\n");
     do {
+        printf("Continuar3? (S/N) ");
         scanf("\n%c", &continuar);
 
-        if (continuar == 'N') menu();
+        if (continuar == 'N') break;
         else if (continuar == 'S') break;
 
     } while (continuar != 'S' || continuar != 'N');
 
+    if (continuar == 'N') return;
+
     mostrarASCII();
     printf("> Para além de jogarem peças, os jogadores podem também utilizar habilidades especiais:\n\n");
     printf("1. Colocar uma pedra numa célula vazia (limitada a 1 por jogo)\n");
-    printf("2. Adicionar uma nova linha ou coluna ao final do tabuleiro (limitada a 2 por jogo)\n");
-    printf("\nContinuar? (S/N) ");
+    printf("2. Adicionar uma nova linha ou coluna ao final do tabuleiro (limitada a 2 por jogo)\n\n");
     do {
-        scanf("%c", &continuar);
+        printf("Continuar4? (S/N) ");
+        scanf("\n%c", &continuar);
 
-        if (continuar == 'N') menu();
-        else if (continuar == 'S') menu();
+        if (continuar == 'N') break;
+        else if (continuar == 'S') break;
 
     } while (continuar != 'S' || continuar != 'N');
+
+    return;
 
 }
