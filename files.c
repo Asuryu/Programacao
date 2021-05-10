@@ -9,13 +9,13 @@
 #include "engine.h"
 
 
-int guardaJogo(plivro p){
+int guardaJogo(ptabuleiro p){
     FILE *f;
     f = fopen("jogo.bin", "wb");
     if(f == NULL) return 0;
 
     while(p != NULL){
-        fwrite(p, sizeof(livro), 1, f);
+        fwrite(p, sizeof(tab), 1, f);
         mostrarTabuleiro(p->tab, p->linhas, p->colunas);
         p = p->prox;
     }
@@ -25,9 +25,9 @@ int guardaJogo(plivro p){
     
 }
 
-plivro recuperaJogo(){
+ptabuleiro recuperaJogo(){
     FILE *f;
-    livro *p = NULL, novo;
+    tab *p = NULL, novo;
 
     f = fopen("jogo.bin", "rb");
     if(f == NULL) return 0;
@@ -35,7 +35,7 @@ plivro recuperaJogo(){
     char **tabuleiro;
     tabuleiro = gerarTabuleiro(5, 5);
     
-    while(fread(&novo, sizeof(livro), 1, f) > 0){ //Retorna o número de elementos como esperado
+    while(fread(&novo, sizeof(tab), 1, f) > 0){
         printf("Tabuleiro: %c ", novo.tab);
         printf("LinhasT: %d ", novo.linhas);
         printf("ColunasT: %d ", novo.colunas);
@@ -52,7 +52,7 @@ plivro recuperaJogo(){
     return p;
 }
 
-int exportarJogo(char *ficheiro, plivro p){
+int exportarJogo(char *ficheiro, ptabuleiro p){
     ficheiro[strlen(ficheiro) - 1] = '\0';
     char extension[5] = ".txt";
     strcat(ficheiro, extension);

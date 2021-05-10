@@ -24,7 +24,7 @@
 
 int mainAAA(){
     char **tabuleiro;
-    plivro lista = NULL;
+    ptabuleiro lista = NULL;
 
     tabuleiro = gerarTabuleiro(4, 4);
     tabuleiro[1][1] = 'X';
@@ -67,7 +67,7 @@ int main(){
 
     initRandom();
 
-    plivro lista = NULL;
+    ptabuleiro lista = NULL;
     Jogador jogadorA;
     Jogador jogadorB;
 

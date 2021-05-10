@@ -240,19 +240,19 @@ int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, 
 
 // LINKED LIST
 
-int lista_vazia(plivro p){
+int lista_vazia(ptabuleiro p){
     if(p == NULL) return 1;
     else return 0;
 }
 
-void mostra_info(plivro p){
+void mostra_info(ptabuleiro p){
     while(p != NULL){
         mostrarTabuleiro(p->tab, p->linhas, p->colunas);
         p = p->prox;
     }
 }
 
-int procura_cota(plivro p, int c){
+int procura_cota(ptabuleiro p, int c){
 
     while(p != NULL){
         if(p->cota == c){
@@ -265,7 +265,7 @@ int procura_cota(plivro p, int c){
 
 }
 
-void preenche(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char cor, int lJogada, int cJogada){
+void preenche(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, char cor, int lJogada, int cJogada){
     char **aux;
     aux = (char **)malloc(sizeof(char *)*l); 
 
@@ -290,10 +290,10 @@ void preenche(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char
     p->prox = NULL;
 }
 
-plivro insere_final(plivro p, char **tabuleiro, int l, int c, int i, int jogador, char cor, int lJogada, int cJogada){
-    plivro novo, aux;
+ptabuleiro insere_final(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, char cor, int lJogada, int cJogada){
+    ptabuleiro novo, aux;
 
-    novo = malloc(sizeof(livro));
+    novo = malloc(sizeof(tab));
     if(novo == NULL) return p;
     preenche(novo, tabuleiro, l, c, i, jogador, cor, lJogada, cJogada);
 
@@ -307,7 +307,7 @@ plivro insere_final(plivro p, char **tabuleiro, int l, int c, int i, int jogador
     return p;
 }
 
-int nrElementos(plivro p){
+int nrElementos(ptabuleiro p){
     int contador = 0;
     while(p != NULL){
         contador++;
@@ -316,8 +316,8 @@ int nrElementos(plivro p){
     return contador - 1;
 }
 
-void liberta_lista(plivro p){
-    plivro aux;
+void liberta_lista(ptabuleiro p){
+    ptabuleiro aux;
     
     while(p != NULL){
         aux = p;

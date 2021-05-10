@@ -10,7 +10,7 @@ typedef struct {
     int expandir;
 } Jogador;
 
-typedef struct objeto livro, *plivro;
+typedef struct objeto tab, *ptabuleiro;
 struct objeto
 {
     char **tab;
@@ -20,7 +20,7 @@ struct objeto
     char pecaJogada;
     int linhaJogada, colunaJogada;
     int cota;
-    plivro prox;
+    ptabuleiro prox;
 };
 
 // Gera um tabuleiro quadrado dinâmico do tipo char com a dimensão espcificada
