@@ -17,6 +17,7 @@ struct objeto
     int linhas;
     int colunas;
     int jogador;
+    int cpu;
     char pecaJogada;
     int linhaJogada, colunaJogada;
     int cota;

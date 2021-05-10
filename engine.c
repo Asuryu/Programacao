@@ -265,7 +265,7 @@ int procura_cota(ptabuleiro p, int c){
 
 }
 
-void preenche(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, char cor, int lJogada, int cJogada){
+void preenche(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, int cpu, char cor, int lJogada, int cJogada){
     char **aux;
     aux = (char **)malloc(sizeof(char *)*l); 
 
@@ -285,17 +285,18 @@ void preenche(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, 
     p->linhaJogada = lJogada;
     p->colunaJogada = cJogada;
     p->jogador = jogador;
+    p->cpu = cpu;
     p->pecaJogada = cor;
     p->cota = i;
     p->prox = NULL;
 }
 
-ptabuleiro insere_final(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, char cor, int lJogada, int cJogada){
+ptabuleiro insere_final(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, int cpu, char cor, int lJogada, int cJogada){
     ptabuleiro novo, aux;
 
     novo = malloc(sizeof(tab));
     if(novo == NULL) return p;
-    preenche(novo, tabuleiro, l, c, i, jogador, cor, lJogada, cJogada);
+    preenche(novo, tabuleiro, l, c, i, jogador, cpu, cor, lJogada, cJogada);
 
     if(p == NULL) p = novo;
     else {
