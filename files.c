@@ -9,14 +9,15 @@
 #include "engine.h"
 
 
-int guardaJogo(ptabuleiro p){
+int guardaJogo(ptabuleiro p, Jogador *A, Jogador *B){
     FILE *f;
     f = fopen("jogo.bin", "wb");
     if(f == NULL) return 0;
 
     while(p != NULL){
         fwrite(p, sizeof(tab), 1, f);
-        mostrarTabuleiro(p->tab, p->linhas, p->colunas);
+        for(int j = 0; j<p->linhas; j++)
+            fwrite(p->tab[j], p->colunas*sizeof(char), 1, f );
         p = p->prox;
     }
     
@@ -25,7 +26,7 @@ int guardaJogo(ptabuleiro p){
     
 }
 
-ptabuleiro recuperaJogo(){
+ptabuleiro recuperaJogo(Jogador *A, Jogador *B){
     FILE *f;
     tab *p = NULL, novo;
 
@@ -33,19 +34,15 @@ ptabuleiro recuperaJogo(){
     if(f == NULL) return 0;
 
     char **tabuleiro;
-    tabuleiro = gerarTabuleiro(5, 5);
+    tabuleiro = gerarTabuleiro(9, 9);
     
     while(fread(&novo, sizeof(tab), 1, f) > 0){
-        printf("Tabuleiro: %c ", novo.tab);
-        printf("LinhasT: %d ", novo.linhas);
-        printf("ColunasT: %d ", novo.colunas);
-        printf("Cota: %d ", novo.cota);
-        printf("Jogador: %d ", novo.jogador);
-        printf("Peça: %c ", novo.pecaJogada);
-        printf("LinhaJ: %d ", novo.linhaJogada);
-        printf("ColunaJ: %d ", novo.colunaJogada);
-        printf("\n\n");
-        //p = insere_final(&novo, novo.tab, novo.linhas, novo.colunas, novo.cota, novo.jogador, 'G', novo.linhaJogada, novo.colunaJogada);
+        novo.tab = tabuleiro;
+
+        for(int j = 0; j<novo.linhas; j++)
+            fread(novo.tab[j], novo.colunas*sizeof(char), 1, f );
+        
+        p = insere_final(p, novo.tab, novo.linhas, novo.colunas, novo.cota, novo.jogador, novo.cpu, 'G', novo.linhaJogada, novo.colunaJogada);
     }
 
     fclose(f);
