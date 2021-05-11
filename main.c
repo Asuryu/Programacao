@@ -1,27 +1,17 @@
 // Trabalho Pratico Programacao - LEI
 // DEIS-ISEC 2020-2021
 
-// GUARDAR A STRUCT NUM BINARY FILE
-// GUARDAR A STRUCT NUM BINARY FILE
-// GUARDAR A STRUCT NUM BINARY FILE
-
-// FAZER UM JOGADOR AUTOMÁTICO
-// FAZER UM JOGADOR AUTOMÁTICO
-// FAZER UM JOGADOR AUTOMÁTICO
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#include "utils.h"
-#include "engine.h"
-#include "files.h"
+#include "headers/utils.h"
+#include "headers/engine.h"
+#include "headers/files.h"
 
-#include "utils.c"
-#include "engine.c"
-#include "files.c"
-
-
+#include "source/utils.c"
+#include "source/engine.c"
+#include "source/files.c"
 
 int main(){
 
@@ -85,7 +75,7 @@ int main(){
         lista = recuperaJogo(&jogadorA, &jogadorB);
 
         aux = lista;
-        while(aux->prox != NULL){
+        while(aux != NULL){
             computador = aux->cpu;
             linhasTotais = aux->linhas;
             colunasTotais = aux->colunas;
@@ -98,10 +88,9 @@ int main(){
     }
 
     int linha, coluna, pedras, expandir, jogadaAleatoria, l, c, cr;
-    char cor, escolha, habilidade, tipo;
+    char cor, escolha, habilidade, tipo, skip;
 
     do{
-        
         mostrarASCII();
         mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
 
@@ -113,43 +102,59 @@ int main(){
             else{
                 int retorno = 0;
                 do{
-                    jogadaAleatoria = intUniformRnd(1, 3);
+                    jogadaAleatoria = intUniformRnd(1, 4);
                     retorno = verificaJogadaCPU(tabuleiro, linhasTotais, colunasTotais, jogada, jogadaAleatoria, &jogadorB);
 
                 } while(retorno == 0);
                 
-
-                mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
-                printf("\n[COMPUTADOR]\n");
                 if(jogadaAleatoria == 1){
-                    printf("Usou uma peça");
-                    
                     if(retorno == 1){
-                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'G', 0, 0);
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'G', 0, 0);
                     }
                     else if(retorno == 2){
-                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'Y', 0, 0);
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'Y', 0, 0);
                     } 
                     else if(retorno == 3){
-                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'R', 0, 0);
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'R', 0, 0);
                     } 
+                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+                    printf("\n[COMPUTADOR]\nUsou uma peça");
                 } 
-                else if(jogadaAleatoria == 2){
-                    printf("Usou uma pedra");
-                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'X', 0, 0);
+                else if(jogadaAleatoria == 2){                   
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'X', 0, 0);
+                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+                    printf("\n[COMPUTADOR]\nUsou uma pedra");
                 } 
                 else if(jogadaAleatoria == 3){
-                    printf("Usou uma expansão");
+                    linhasTotais++;
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
+                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+                    printf("\n[COMPUTADOR]\nUsou uma expansão (linhas)");
+                } 
+                else if(jogadaAleatoria == 4){
                     colunasTotais++;
-                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'E', 0, 0);
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
+                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+                    printf("\n[COMPUTADOR]\nUsou uma expansão (colunas)");
                 } 
 
-                mostra_info(lista);
-                scanf("%d", &computador);
+                printf("\nPressione a tecla ENTER para continuar");
+                fflush(stdin);
+                getchar();
 
                 jogada++;
                 turno = 0;
             }
+        }
+
+        if(computador == 0){
+            mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+            if(turno == 0) printf("\n[JOGADOR A]\n");
+            else printf("\n[JOGADOR B]\n");
+        } else {
+            mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+            if(turno == 0) printf("\n[JOGADOR A]\n");
+            else printf("\n[COMPUTADOR]\n");
         }
 
         printf("Que jogada queres efetuar? (P - Peça / H - Habilidade / T - Tabuleiro / E - Sair): ");
