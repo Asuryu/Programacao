@@ -1,5 +1,6 @@
 // Trabalho Pratico Programacao - LEI
 // DEIS-ISEC 2020-2021
+// Tomás Gomes Silva - 2020143845
 
 #include <stdio.h>
 #include <stdlib.h>
