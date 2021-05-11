@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "utils.h"
+#include "../headers/utils.h"
 
 void initRandom(){
     srand(time(NULL));

@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "files.h"
-#include "engine.h"
+#include "../headers/files.h"
+#include "../headers/engine.h"
 
 
 int guardaJogo(ptabuleiro p, Jogador *A, Jogador *B){
@@ -46,7 +46,8 @@ ptabuleiro recuperaJogo(Jogador *A, Jogador *B){
         for(int j = 0; j<novo.linhas; j++)
             fread(novo.tab[j], novo.colunas*sizeof(char), 1, f );
         
-        p = insere_final(p, novo.tab, novo.linhas, novo.colunas, novo.cota, novo.jogador, novo.cpu, 'G', novo.linhaJogada, novo.colunaJogada);
+        p = insere_final(p, novo.tab, novo.linhas, novo.colunas, novo.cota, novo.jogador, novo.cpu, novo.pecaJogada, novo.linhaJogada, novo.colunaJogada);
+        
     }
 
     fclose(f);

@@ -56,4 +56,14 @@ int colocarPeca(char **tabuleiro, char cor, int l, int c, int linhas, int coluna
 // Parâmetros (tabuleiro - Ponteiro duplo que aponta para o início do tabuleiro, linhas - Linhas para alterar, colunas - Colunas para alterar, tipo - Tipo de expansão: 'L' - Expansão de uma linha / 'C' - Expansão de uma coluna)
 char **expandirTabuleiro(char **tabuleiro, int linhas, int colunas, char tipo);
 
+int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int jogada, int indicador, Jogador *B);
+
+int lista_vazia(ptabuleiro p);
+void mostra_info(ptabuleiro p);
+int procura_cota(ptabuleiro p, int c);
+void preenche(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, int cpu, char cor, int lJogada, int cJogada);
+ptabuleiro insere_final(ptabuleiro p, char **tabuleiro, int l, int c, int i, int jogador, int cpu, char cor, int lJogada, int cJogada);
+int nrElementos(ptabuleiro p);
+void liberta_lista(ptabuleiro p);
+
 #endif /* ENGINE_H */

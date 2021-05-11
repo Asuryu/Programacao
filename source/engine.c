@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "engine.h"
-#include "utils.h"
+#include "../headers/engine.h"
+#include "../headers/utils.h"
 
 char **gerarTabuleiro(int linhas, int colunas){
 
@@ -218,17 +218,18 @@ int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int jogada, int
 
     else if(indicador == 3){
         if(expandir > 0){
-            int escolhaExp = intUniformRnd(1, 2);
-            if(escolhaExp == 1){
-                tabuleiro = expandirTabuleiro(tabuleiro, linhas, colunas + 1, 'C');
-                B->expandir = expandir - 1;
-                return 5;
-            }
-            if(escolhaExp == 2){
-                tabuleiro = expandirTabuleiro(tabuleiro, linhas, colunas + 1, 'C');
-                B->expandir = expandir - 1;
-                return 6;
-            }
+            tabuleiro = expandirTabuleiro(tabuleiro, linhas + 1, colunas, 'L');
+            B->expandir = expandir - 1;
+            return 5;
+        }
+        else return 0;
+    }
+
+    else if(indicador == 4){
+        if(expandir > 0){
+            tabuleiro = expandirTabuleiro(tabuleiro, linhas, colunas + 1, 'C');
+            B->expandir = expandir - 1;
+            return 6;
         }
         else return 0;
     }
