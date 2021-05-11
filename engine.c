@@ -311,10 +311,15 @@ ptabuleiro insere_final(ptabuleiro p, char **tabuleiro, int l, int c, int i, int
 int nrElementos(ptabuleiro p){
     int contador = 0;
     while(p != NULL){
+        printf("%d ", p->cota);
         contador++;
         p = p->prox;
     }
     return contador - 1;
+}
+
+void retomarVariaveis(ptabuleiro p, int *computador, int *linhasTotais, int *colunasTotais, int *jogada, int *turno, char **tabuleiro){
+    
 }
 
 void liberta_lista(ptabuleiro p){
