@@ -175,7 +175,7 @@ char **expandirTabuleiro(char **tabuleiro, int linhas, int colunas, char tipo){
 
 }
 
-int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, Jogador *B){
+int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int jogada, int indicador, Jogador *B){
 
     int pedras = B->pedras;
     int expandir = B->expandir;
@@ -189,11 +189,11 @@ int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, 
                 }
                 else if(tabuleiro[i][j] == 'G'){
                     colocarPeca(tabuleiro, 'Y', i+1, j+1, linhas, colunas); 
-                    return 1;
+                    return 2;
                 }
                 else if(tabuleiro[i][j] == 'Y'){
                     colocarPeca(tabuleiro, 'R', i+1, j+1, linhas, colunas); 
-                    return 1;
+                    return 3;
                 }
             }
         }
@@ -206,7 +206,8 @@ int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, 
                 for(int j = 0; j < colunas; j++){
                     if(tabuleiro[i][j] == '_'){
                         colocarPeca(tabuleiro, 'X', i+1, j+1, linhas, colunas);
-                        return 1;
+                        B->pedras = pedras - 1;
+                        return 4;
                     }
                 }
             }
@@ -216,16 +217,17 @@ int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, 
     }
 
     else if(indicador == 3){
-        printf("%d %d", linhas, colunas);
         if(expandir > 0){
             int escolhaExp = intUniformRnd(1, 2);
             if(escolhaExp == 1){
                 tabuleiro = expandirTabuleiro(tabuleiro, linhas, colunas + 1, 'C');
-                return 1;
+                B->expandir = expandir - 1;
+                return 5;
             }
             if(escolhaExp == 2){
                 tabuleiro = expandirTabuleiro(tabuleiro, linhas, colunas + 1, 'C');
-                return 1;
+                B->expandir = expandir - 1;
+                return 6;
             }
         }
         else return 0;
@@ -234,11 +236,6 @@ int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, 
     else return 0;
 
 }
-
-
-
-
-// LINKED LIST
 
 int lista_vazia(ptabuleiro p){
     if(p == NULL) return 1;
@@ -310,16 +307,11 @@ ptabuleiro insere_final(ptabuleiro p, char **tabuleiro, int l, int c, int i, int
 
 int nrElementos(ptabuleiro p){
     int contador = 0;
-    while(p != NULL){
-        printf("%d ", p->cota);
+    while(p->prox != NULL){
         contador++;
         p = p->prox;
     }
-    return contador - 1;
-}
-
-void retomarVariaveis(ptabuleiro p, int *computador, int *linhasTotais, int *colunasTotais, int *jogada, int *turno, char **tabuleiro){
-    
+    return contador;
 }
 
 void liberta_lista(ptabuleiro p){

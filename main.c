@@ -22,10 +22,12 @@
 #include "files.c"
 
 
+
 int main(){
 
     Jogador jogadorA;
     Jogador jogadorB;
+    int jogada;
 
     int flag = 0;
 
@@ -50,10 +52,10 @@ int main(){
     initRandom();
 
     ptabuleiro lista = NULL;
+    ptabuleiro aux;
 
     int randomDim;
     int computador;
-    int jogada;
     int linhasTotais, colunasTotais, turno = 0;
     char **tabuleiro;
 
@@ -79,28 +81,19 @@ int main(){
         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, computador, NULL, NULL, NULL);
     
     } else {
-        // LER DO FICHEIRO DO JOGO ANTERIOR
-
-        // Carregar:
-        // 1. TABELA
-        // 2. LINHAS E COLUNAS
-        // 3. TURNO
-        // 4. JOGADORES
 
         lista = recuperaJogo(&jogadorA, &jogadorB);
-        printf("%d ", nrElementos(lista));
 
-        while(lista != NULL){
-            computador = lista->cpu;
-            linhasTotais = lista->linhas;
-            colunasTotais = lista->colunas;
-            jogada = lista->cota;
-            turno = lista->jogador;
-            tabuleiro = lista->tab;
-            lista = lista->prox;
+        aux = lista;
+        while(aux->prox != NULL){
+            computador = aux->cpu;
+            linhasTotais = aux->linhas;
+            colunasTotais = aux->colunas;
+            jogada = aux->cota;
+            turno = aux->jogador;
+            tabuleiro = aux->tab;
+            aux = aux->prox;
         }
-
-        return 0;
 
     }
 
@@ -108,6 +101,7 @@ int main(){
     char cor, escolha, habilidade, tipo;
 
     do{
+        
         mostrarASCII();
         mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
 
@@ -117,17 +111,43 @@ int main(){
         } else if(computador == 1) {
             if(turno == 0) printf("\n[JOGADOR A]\n");
             else{
-                //printf("\n[COMPUTADOR]\n");
+                int retorno = 0;
                 do{
-                    jogadaAleatoria = 1;
-                } while(verificaJogadaCPU(tabuleiro, linhasTotais, colunasTotais, jogadaAleatoria, &jogadorB) == 0);
+                    jogadaAleatoria = intUniformRnd(1, 3);
+                    retorno = verificaJogadaCPU(tabuleiro, linhasTotais, colunasTotais, jogada, jogadaAleatoria, &jogadorB);
+
+                } while(retorno == 0);
                 
+
                 mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
-                if(jogadaAleatoria == 1) printf("Usou uma peça");
-                else if(jogadaAleatoria == 2) printf("Usou uma pedra");
-                else if(jogadaAleatoria == 3) printf("Usou uma expansão");
-                
-                scanf("%d", &randomDim);
+                printf("\n[COMPUTADOR]\n");
+                if(jogadaAleatoria == 1){
+                    printf("Usou uma peça");
+                    
+                    if(retorno == 1){
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'G', 0, 0);
+                    }
+                    else if(retorno == 2){
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'Y', 0, 0);
+                    } 
+                    else if(retorno == 3){
+                        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'R', 0, 0);
+                    } 
+                } 
+                else if(jogadaAleatoria == 2){
+                    printf("Usou uma pedra");
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'X', 0, 0);
+                } 
+                else if(jogadaAleatoria == 3){
+                    printf("Usou uma expansão");
+                    colunasTotais++;
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 22, turno, computador, 'E', 0, 0);
+                } 
+
+                mostra_info(lista);
+                scanf("%d", &computador);
+
+                jogada++;
                 turno = 0;
             }
         }
