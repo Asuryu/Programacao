@@ -22,28 +22,10 @@
 #include "files.c"
 
 
-int mainAAA(){
-    char **tabuleiro;
-    ptabuleiro lista = NULL;
-
-    tabuleiro = gerarTabuleiro(4, 4);
-    tabuleiro[1][1] = 'X';
-    lista = insere_final(lista, tabuleiro, 4, 4, 0, NULL, NULL, NULL, NULL, NULL);
-    tabuleiro[1][2] = 'X';
-    lista = insere_final(lista, tabuleiro, 4, 4, 1, NULL, NULL, NULL, NULL, NULL);
-    //guardaJogo(lista, 2);
-    //recuperaJogo();
-
-    while(lista != NULL){
-        printf("%d\n\n", lista->colunas);
-        mostrarTabuleiro(lista->tab, lista->linhas, lista->colunas);
-        lista = lista->prox;
-    }
-
-    return 0;
-}
-
 int main(){
+
+    Jogador jogadorA;
+    Jogador jogadorB;
 
     int flag = 0;
 
@@ -68,8 +50,6 @@ int main(){
     initRandom();
 
     ptabuleiro lista = NULL;
-    Jogador jogadorA;
-    Jogador jogadorB;
 
     int randomDim;
     int computador;
@@ -108,6 +88,8 @@ int main(){
         // 4. JOGADORES
 
         lista = recuperaJogo(&jogadorA, &jogadorB);
+        printf("%d ", nrElementos(lista));
+
         while(lista != NULL){
             computador = lista->cpu;
             linhasTotais = lista->linhas;
@@ -117,6 +99,8 @@ int main(){
             tabuleiro = lista->tab;
             lista = lista->prox;
         }
+
+        return 0;
 
     }
 
@@ -263,7 +247,7 @@ int main(){
                         scanf("%d", &k);
                         printf("\n");
                     }
-
+                    
                     if(procura_cota(lista, nrElementos(lista) - k)){
                         
                         do {

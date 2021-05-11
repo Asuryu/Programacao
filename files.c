@@ -14,13 +14,15 @@ int guardaJogo(ptabuleiro p, Jogador *A, Jogador *B){
     f = fopen("jogo.bin", "wb");
     if(f == NULL) return 0;
 
+    fwrite(A, sizeof(Jogador), 1, f);
+    fwrite(B, sizeof(Jogador), 1, f);
     while(p != NULL){
         fwrite(p, sizeof(tab), 1, f);
         for(int j = 0; j<p->linhas; j++)
             fwrite(p->tab[j], p->colunas*sizeof(char), 1, f );
         p = p->prox;
     }
-    
+
     fclose(f);
     return 1;
     
@@ -36,6 +38,8 @@ ptabuleiro recuperaJogo(Jogador *A, Jogador *B){
     char **tabuleiro;
     tabuleiro = gerarTabuleiro(9, 9);
     
+    fread(A, sizeof(Jogador), 1, f);
+    fread(B, sizeof(Jogador), 1, f);
     while(fread(&novo, sizeof(tab), 1, f) > 0){
         novo.tab = tabuleiro;
 
