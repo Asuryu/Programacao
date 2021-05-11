@@ -66,7 +66,6 @@ int exportarJogo(char *ficheiro, ptabuleiro p){
     char cor, nome;
     char **tabuleiro;
     while(p != NULL){
-        p = p->prox;
         tabuleiro = p->tab;
         cota = p->cota;
         l = p->linhas;
