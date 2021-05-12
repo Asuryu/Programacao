@@ -37,12 +37,15 @@ struct objeto
 // Para além disso preenche o tabueleiro com "_" que representam o espaço vazio
 // Retorna um double-pointer que aponta para o início do tabuleiro 
 //
-// Parâmetro (dim - Dimensão do tabuleiro)
+// Parâmetros (linhas - Linhas do tabuleiro, colunas - Colunas do tabuleiro)
 char **gerarTabuleiro(int linhas, int colunas);
 
 // Mostra o tabuleiro no estado atual
 // Pode servir para dar refresh depois de uma jogada
-void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas);
+//
+// Parâmetros (tabuleiro - Ponteiro para o tabuleiro de jogo, linhas - Linhas do tabuleiro, colunas - Colunas do tabuleiro)
+// Parâmetros (switch - se o switch está a 0 limpa o ecrã antes de mostrar se não não limpa)
+void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas, int swtc);
 
 // Verifica se a jogada efetuada permite ganhar o jogo
 // Retorna o resultado do jogada (0 - Não vai ganhar / 1 - Ganha o jogo)
@@ -88,7 +91,7 @@ void mostra_info(ptabuleiro p);
 // Retorna o sucesso da operação (0 - Elemento encontrado / 1 - Elemento não encontrado)
 //
 // Parâmetros (p - ponteiro para o início da lista ligada, c - cota a ser procurada na lista ligada)
-int procura_cota(ptabuleiro p, int c);
+int listaInvertida(ptabuleiro p, int c);
 
 // Preenche a lista com a informação passada nos parâmetros
 //

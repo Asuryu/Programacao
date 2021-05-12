@@ -29,9 +29,9 @@ char **gerarTabuleiro(int linhas, int colunas){
 
 }
 
-void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas){
+void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas, int swtc){
 
-    mostrarASCII();
+    if(swtc == 1) mostrarASCII(); // Se o switch estiver a 1 limpa o ecrã
     for(int i = 0; i < linhas; i++){ // Percorre as linhas do tabuleiro
         for(int j = 0; j < colunas; j++){ // Percorre as colunas do tabuleiro
             printf("%c ", tabuleiro[i][j]); // Mostra o que é que está no par linha/coluna
@@ -247,21 +247,24 @@ int lista_vazia(ptabuleiro p){
 
 void mostra_info(ptabuleiro p){
     while(p != NULL){ // Percorre a lista ligada enquanto o elemento atual não é nulo
-        mostrarTabuleiro(p->tab, p->linhas, p->colunas); // Mostra o tabuleiro desse elemento da lista ligada
+        mostrarTabuleiro(p->tab, p->linhas, p->colunas, 1); // Mostra o tabuleiro desse elemento da lista ligada
         p = p->prox; // Salta para o próximo elemento da lista ligada
     }
 }
 
-int procura_cota(ptabuleiro p, int c){
+int listaInvertida(ptabuleiro p, int c){
 
-    while(p != NULL){ // Percorre a lista ligada enquanto o elemento atual não é nulo
-        if(p->cota == c){ // Se a cota corresponde à cota pesquisada, então:
-            mostrarTabuleiro(p->tab, p->linhas, p->colunas); // Mostra o tabuleiro dessa cota
-            return 1; // Retorna o sucesso da operação
+    int lidos = 0; // Elementos lidos
+
+    if (p != NULL) { // Se o ponteiro para a lista não for NULO:
+        listaInvertida(p->prox, c); // Inverte a lista (função recursiva)
+        if(p->cota > c){ // Se a cota for menor do que a cota pretendida:
+            mostrarTabuleiro(p->tab, p->linhas, p->colunas, 0); // Mostra o tabuleiro
+            lidos++; // Incrementa o contador
         }
-        else p = p->prox; // Se não salta para o próximo elemento da lista ligada
     }
-    return 0;
+
+    return lidos; // Retorna o número de elementos lidos
 
 }
 
@@ -316,7 +319,7 @@ int nrElementos(ptabuleiro p){
         contador++; // Incrementa o contador
         p = p->prox; // Salta para o próximo elemento da lista ligada
     }
-    return contador; // Retorna o número de elementos
+    return contador + 1; // Retorna o número de elementos
 }
 
 void liberta_lista(ptabuleiro p){
