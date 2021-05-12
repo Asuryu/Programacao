@@ -97,7 +97,7 @@ int main(){
 
     do{
         mostrarASCII();
-        mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais); // Mostra o tabuleiro no estado atual
+        mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 0); // Mostra o tabuleiro no estado atual
 
         if(computador == 0){ // Se o utilizador tiver escolhido jogar contra um humano, então:
             if(turno == 0) printf("\n[JOGADOR A]\n"); // Cabeçalho para o jogador A se o turno for 0
@@ -125,27 +125,27 @@ int main(){
                         // Adiciona a jogada ao final da lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'R', 0, 0);
                     } 
-                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais); // Mostra o tabuleiro depois do CPU ter feito a jogada
+                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
                     printf("\n[COMPUTADOR]\nUsou uma peça"); // Cabeçalho para o CPU
                 } 
                 else if(jogadaAleatoria == 2){ // Se a jogada escolhida tiver sido "colocar uma pedra", então:
                     // Adiciona a jogada ao final da lista ligada             
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'X', 0, 0);
-                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais); // Mostra o tabuleiro depois do CPU ter feito a jogada
+                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
                     printf("\n[COMPUTADOR]\nUsou uma pedra"); // Cabeçalho para o CPU
                 } 
                 else if(jogadaAleatoria == 3){ // Se a jogada escolhida tiver sido "expandir as linhas", então:
                     linhasTotais++; // Incrementa as linhas do tabuleiro
                     // Adiciona a jogada ao final da lista ligada
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
-                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais); // Mostra o tabuleiro depois do CPU ter feito a jogada
+                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
                     printf("\n[COMPUTADOR]\nUsou uma expansão (linhas)"); // Cabeçalho para o CPU
                 } 
                 else if(jogadaAleatoria == 4){ // Se a jogada escolhida tiver sido "expandir as colunas", então:
                     colunasTotais++; // Incrementa as colunas do tabuleiro
                     // Adiciona a jogada ao final da lista ligada
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
-                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais); // Mostra o tabuleiro depois do CPU ter feito a jogada
+                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
                     printf("\n[COMPUTADOR]\nUsou uma expansão (colunas)"); // Cabeçalho para o CPU
                 } 
 
@@ -160,11 +160,11 @@ int main(){
 
         // Mostrar tabuleiro depois de ter sido alterado
         if(computador == 0){
-            mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+            mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1);
             if(turno == 0) printf("\n[JOGADOR A]\n");
             else printf("\n[JOGADOR B]\n");
         } else {
-            mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais);
+            mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1);
             if(turno == 0) printf("\n[JOGADOR A]\n");
             else printf("\n[COMPUTADOR]\n");
         }
@@ -288,7 +288,7 @@ int main(){
                 int k; // Jogadas anteriores que o jogador quer visulizar (a definir)
                 char continuar;
                 do {
-                    mostrarASCII();
+                    //mostrarASCII();
                     if(jogada == 1) k = 0; // Se só tiver havido uma jogada mostra o tabuleiro no estado atual
                     else if(jogada == 2) k = 1; // Se só tiver havido duas jogadas mostra o tabuleiro no estado anterior
                     else{
@@ -297,19 +297,13 @@ int main(){
                         printf("\n");
                     }
                     
-                    
-                    if(procura_cota(lista, nrElementos(lista) - k)){ // Se a jogada que o jogador escolheu ver existir, então:
-                        
-                        do {
-                            printf("\nContinuar? (S/N) ");
-                            scanf("\n\n%c", &continuar);
-                            break;
-                        } while (continuar != 'S' || continuar != 'N');
-                        
-                        if(continuar == 'S') break; // Ciclo para perguntar se o jogador quer voltar ao jogo ou ver mais jogadas
-                    }
+                    listaInvertida(lista, nrElementos(lista) - k - 1); // Inverter a lista e obter os k elementos do início
+                    printf("\nPressione a tecla ENTER para continuar");
+                    fflush(stdin);
+                    getchar();
 
-                } while ((k > nrElementos(lista) || k <= 0) || continuar == 'N'); // Ciclo obrigar o jogador a introduzir uma jogada válida
+
+                } while (k > nrElementos(lista) || continuar == 'N' || k <= 0); // Ciclo obrigar o jogador a introduzir uma jogada válida
 
                 break;
 
