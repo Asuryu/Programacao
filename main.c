@@ -2,10 +2,6 @@
 // DEIS-ISEC 2020-2021
 // Tomás Gomes Silva - 2020143845
 
-// K JOGADAS ANTERIORES (SUCESSÃO)
-// K JOGADAS ANTERIORES (SUCESSÃO)
-// K JOGADAS ANTERIORES (SUCESSÃO)
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
