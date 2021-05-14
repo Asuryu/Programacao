@@ -2,6 +2,10 @@
 // DEIS-ISEC 2020-2021
 // Tomás Gomes Silva - 2020143845
 
+// FAZER LINK DOS FICHEIROS C
+// FAZER LINK DOS FICHEIROS C
+// FAZER LINK DOS FICHEIROS C
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
