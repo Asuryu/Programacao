@@ -2,9 +2,10 @@
 // DEIS-ISEC 2020-2021
 // Tomás Gomes Silva - 2020143845
 
-// FAZER LINK DOS FICHEIROS C
-// FAZER LINK DOS FICHEIROS C
-// FAZER LINK DOS FICHEIROS C
+// COMPILAR O CÓDIGO:
+// gcc -c main.c
+// gcc -c ./source/engine.c -o ./o/engine.o
+// gcc -o output main.o ./o/engine.o ./o/files.o ./o/utils.o
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,10 +14,6 @@
 #include "headers/utils.h"
 #include "headers/engine.h"
 #include "headers/files.h"
-
-#include "source/utils.c"
-#include "source/engine.c"
-#include "source/files.c"
 
 int main(){
 
@@ -73,7 +70,7 @@ int main(){
         jogada = 1;
 
         tabuleiro = gerarTabuleiro(linhasTotais, colunasTotais); // Função para gerar um tabuleiro pela primeira vez com tamanho passado nos parâmetros
-        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, NULL, computador, NULL, NULL, NULL); // Inserir a jogada 0 (inicialização do tabuleiro) na lista ligada
+        lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, 0, -1, computador, '\0', -1, -1); // Inserir a jogada 0 (inicialização do tabuleiro) na lista ligada
     
     } else { // Se o utilizador tiver escolhido continuar com o jogo anterior, então:
 
@@ -92,8 +89,8 @@ int main(){
 
     }
 
-    int linha, coluna, pedras, expandir, jogadaAleatoria, l, c, cr; // Inicialização de variáveis (linha jogada, coluna jogada, quantidade de pedras, quantidade de expansões, ...)
-    char cor, escolha, habilidade, tipo, skip; // Inicialização de variáveis
+    int linha, coluna, pedras, expandir, jogadaAleatoria; // Inicialização de variáveis (linha jogada, coluna jogada, quantidade de pedras, quantidade de expansões, ...)
+    char cor, escolha, habilidade, tipo; // Inicialização de variáveis
 
     do{
         mostrarASCII();
@@ -108,7 +105,7 @@ int main(){
                 int retorno = 0;
                 do{
                     jogadaAleatoria = intUniformRnd(1, 4); // Número de 1 a 4 que representa a jogada que o computador vai efetuar
-                    retorno = verificaJogadaCPU(tabuleiro, linhasTotais, colunasTotais, jogada, jogadaAleatoria, &jogadorB); // Função para realizar uma jogada (CPU)
+                    retorno = verificaJogadaCPU(tabuleiro, linhasTotais, colunasTotais, jogadaAleatoria, &jogadorB); // Função para realizar uma jogada (CPU)
 
                 } while(retorno == 0); // Faz o ciclo enquanto não encontrar uma jogada válida para efetuar
                 
@@ -116,26 +113,33 @@ int main(){
                     if(retorno == 1){
                         // Adiciona a jogada ao final da lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'G', 0, 0);
+                        mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
+                        printf("\n[COMPUTADOR]\nColocou uma peça verde"); // Cabeçalho para o CPU
+
                     }
                     else if(retorno == 2){ // Se a jogada escolhida tiver sido "colocar uma peça amarela", então:
                         // Adiciona a jogada ao final da lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'Y', 0, 0);
+                        mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
+                        printf("\n[COMPUTADOR]\nColocou uma peça amarela"); // Cabeçalho para o CPU
+
                     } 
                     else if(retorno == 3){ // Se a jogada escolhida tiver sido "colocar uma peça vermelha", então:
                         // Adiciona a jogada ao final da lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'R', 0, 0);
+                        mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
+                        printf("\n[COMPUTADOR]\nColocou uma peça vermelha"); // Cabeçalho para o CPU
                     } 
-                    mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
-                    printf("\n[COMPUTADOR]\nUsou uma peça"); // Cabeçalho para o CPU
                 } 
                 else if(jogadaAleatoria == 2){ // Se a jogada escolhida tiver sido "colocar uma pedra", então:
                     // Adiciona a jogada ao final da lista ligada             
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'X', 0, 0);
                     mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
-                    printf("\n[COMPUTADOR]\nUsou uma pedra"); // Cabeçalho para o CPU
+                    printf("\n[COMPUTADOR]\nColocou uma pedra no tabuleiro"); // Cabeçalho para o CPU
                 } 
                 else if(jogadaAleatoria == 3){ // Se a jogada escolhida tiver sido "expandir as linhas", então:
                     linhasTotais++; // Incrementa as linhas do tabuleiro
+                    getchar();
                     // Adiciona a jogada ao final da lista ligada
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
                     mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
@@ -143,6 +147,7 @@ int main(){
                 } 
                 else if(jogadaAleatoria == 4){ // Se a jogada escolhida tiver sido "expandir as colunas", então:
                     colunasTotais++; // Incrementa as colunas do tabuleiro
+                    getchar();
                     // Adiciona a jogada ao final da lista ligada
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
                     mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
@@ -277,7 +282,7 @@ int main(){
                     }
                     
                     // Adiciona a jogada à lista ligada
-                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', NULL, NULL);
+                    lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', -1, -1);
                     jogada++; // Incrementa a jogada
                 }
 
@@ -286,7 +291,7 @@ int main(){
             case 'T': // No caso do utilizador querer ver as jogadas anteriores
                 mostrarASCII();
                 int k; // Jogadas anteriores que o jogador quer visulizar (a definir)
-                char continuar;
+                char continuar = '\0';
                 do {
                     //mostrarASCII();
                     if(jogada == 1) k = 0; // Se só tiver havido uma jogada mostra o tabuleiro no estado atual
