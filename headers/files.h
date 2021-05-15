@@ -5,6 +5,8 @@
 #ifndef FILES_H
 #define FILES_H
 
+#include "engine.h"
+
 // Guarda o jogo atual num ficheiro binário para ser acedido mais tarde
 // Retorna o sucesso da operação (0 - Erro / 1 - Sucesso)
 //

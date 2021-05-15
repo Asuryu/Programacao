@@ -73,7 +73,7 @@ char **expandirTabuleiro(char **tabuleiro, int linhas, int colunas, char tipo);
 //
 // Parâmetros (tabuleiro - Ponteiro duplo que aponta para o tabuleiro, linhas - Linhas do tabuleiro, colunas - Colunas do tabuleiro) 
 // Parâmetros (indicador - jogada escolhida aleatoriamente, B - ponteiro para a struct do jogador B (que representa o CPU neste caso)) 
-int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int jogada, int indicador, Jogador *B);
+int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, Jogador *B);
 
 // Verifica se uma lista está vazia
 // Retorna o resultado da operação (0 - Preenchida / 1 - Vazia)

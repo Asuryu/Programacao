@@ -177,7 +177,7 @@ char **expandirTabuleiro(char **tabuleiro, int linhas, int colunas, char tipo){
 
 }
 
-int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int jogada, int indicador, Jogador *B){
+int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, Jogador *B){
 
     int pedras = B->pedras; // As pedras disponíveis do CPU correspondem às peças do jogador B
     int expandir = B->expandir; // As expansões disponíveis do CPU correspondem às expansões do jogador B

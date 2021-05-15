@@ -63,6 +63,7 @@ int menu(){
     else menu();
 
     menu();
+    return -1;
 }
 
 void howToPlay(){

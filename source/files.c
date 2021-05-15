@@ -9,7 +9,6 @@
 #include "../headers/files.h"
 #include "../headers/engine.h"
 
-
 int guardaJogo(ptabuleiro p, Jogador *A, Jogador *B){
     FILE *f; // Criar um ponteiro para o ficheiro
     f = fopen("jogo.bin", "wb"); // Abrir o ficheiro "jogo.bin" no modo de escrita binária
@@ -80,16 +79,16 @@ int exportarJogo(char *ficheiro, ptabuleiro p){
         fprintf(f, "JOGADA %d\n", cota); // Escreve o número da jogada no ficheiro
         if(turno == 0) nome = 'A'; // Escreve o nome do jogador A na jogada atual no ficheiro (caso a jogada tenha sido feita pelo jogador A)
         else if(turno == 1) nome = 'B'; // Escreve o nome do jogador B na jogada atual no ficheiro (caso a jogada tenha sido feita pelo jogador B)
-        else nome = NULL; // Caso contrário o nome do jogador é NULO
+        else nome = '\0'; // Caso contrário o nome do jogador é NULO
 
         // Inclui uma mensagem com o detalhe do que é que aconteceu na jogada atual
-        if(cor == NULL || nome == NULL) fprintf(f, "O tabuleiro foi iniciado com %d linhas e %d colunas\n", l, c);
+        if(cor == '\0' || nome == '\0') fprintf(f, "O tabuleiro foi iniciado com %d linhas e %d colunas\n", l, c);
         else if(cor == 'X') fprintf(f, "O jogador %c colocou uma pedra na posição (%d, %d)\n", nome, lJogada, cJogada);
         else if(cor == 'E') fprintf(f, "O jogador %c expandiu o tabuleiro\n", nome);
         else if(cor == 'G') fprintf(f, "O jogador %c colocou uma peça verde na posição (%d, %d)\n", nome, lJogada, cJogada);
         else if(cor == 'Y') fprintf(f, "O jogador %c colocou uma peça amarela na posição (%d, %d)\n", nome, lJogada, cJogada);
         else if(cor == 'R') fprintf(f, "O jogador %c colocou uma peça vermelha na posição (%d, %d)\n", nome, lJogada, cJogada);
-        else fprintf(f, "O jogador %c fez uma jogada inesperada que o programa não estava à espera!\n", nome, lJogada, cJogada);
+        else fprintf(f, "ERRO! O jogador %c fez uma jogada inesperada!\n", nome);
 
         for(int i = 0; i < l; i++){ // Percorre as linhas do tabuleiro
             for(int j = 0; j < c; j++){ // Percorre as colunas do tabuleiro
