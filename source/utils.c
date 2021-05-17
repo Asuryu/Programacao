@@ -31,7 +31,7 @@ int existeFicheiro(){
 
 void mostrarASCII(){
 
-    system("@clear||cls");
+    system("@cls||clear");
     printf("   _____                      ____                     \n");
     printf("  / ___/___  ____ ___  ____ _/ __/___  _________  _____\n");
     printf("  |__ \\/ _ \\/ __ `__ \\/ __ `/ /_/ __ \\/ ___/ __ \\/ ___/\n");
