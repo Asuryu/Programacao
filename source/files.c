@@ -83,11 +83,11 @@ int exportarJogo(char *ficheiro, ptabuleiro p){
 
         // Inclui uma mensagem com o detalhe do que é que aconteceu na jogada atual
         if(cor == '\0' || nome == '\0') fprintf(f, "O tabuleiro foi iniciado com %d linhas e %d colunas\n", l, c);
-        else if(cor == 'X') fprintf(f, "O jogador %c colocou uma pedra na posição (%d, %d)\n", nome, lJogada, cJogada);
+        else if(cor == 'X') fprintf(f, "O jogador %c colocou uma pedra na posi\u00E7\u00E3o (%d, %d)\n", nome, lJogada, cJogada);
         else if(cor == 'E') fprintf(f, "O jogador %c expandiu o tabuleiro\n", nome);
-        else if(cor == 'G') fprintf(f, "O jogador %c colocou uma peça verde na posição (%d, %d)\n", nome, lJogada, cJogada);
-        else if(cor == 'Y') fprintf(f, "O jogador %c colocou uma peça amarela na posição (%d, %d)\n", nome, lJogada, cJogada);
-        else if(cor == 'R') fprintf(f, "O jogador %c colocou uma peça vermelha na posição (%d, %d)\n", nome, lJogada, cJogada);
+        else if(cor == 'G') fprintf(f, "O jogador %c colocou uma pe\u00E7a verde na posi\u00E7\u00E3o (%d, %d)\n", nome, lJogada, cJogada);
+        else if(cor == 'Y') fprintf(f, "O jogador %c colocou uma pe\u00E7a amarela na posi\u00E7\u00E3o (%d, %d)\n", nome, lJogada, cJogada);
+        else if(cor == 'R') fprintf(f, "O jogador %c colocou uma pe\u00E7a vermelha na posi\u00E7\u00E3o (%d, %d)\n", nome, lJogada, cJogada);
         else fprintf(f, "ERRO! O jogador %c fez uma jogada inesperada!\n", nome);
 
         for(int i = 0; i < l; i++){ // Percorre as linhas do tabuleiro
