@@ -114,21 +114,21 @@ int main(){
                         // Adiciona a jogada ao final da lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'G', 0, 0);
                         mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
-                        printf("\n[COMPUTADOR]\nColocou uma peça verde"); // Cabeçalho para o CPU
+                        printf("\n[COMPUTADOR]\nColocou uma pe\u00E7a verde"); // Cabeçalho para o CPU
 
                     }
                     else if(retorno == 2){ // Se a jogada escolhida tiver sido "colocar uma peça amarela", então:
                         // Adiciona a jogada ao final da lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'Y', 0, 0);
                         mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
-                        printf("\n[COMPUTADOR]\nColocou uma peça amarela"); // Cabeçalho para o CPU
+                        printf("\n[COMPUTADOR]\nColocou uma pe\u00E7a amarela"); // Cabeçalho para o CPU
 
                     } 
                     else if(retorno == 3){ // Se a jogada escolhida tiver sido "colocar uma peça vermelha", então:
                         // Adiciona a jogada ao final da lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'R', 0, 0);
                         mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
-                        printf("\n[COMPUTADOR]\nColocou uma peça vermelha"); // Cabeçalho para o CPU
+                        printf("\n[COMPUTADOR]\nColocou uma pe\u00E7a vermelha"); // Cabeçalho para o CPU
                     } 
                 } 
                 else if(jogadaAleatoria == 2){ // Se a jogada escolhida tiver sido "colocar uma pedra", então:
@@ -143,7 +143,7 @@ int main(){
                     // Adiciona a jogada ao final da lista ligada
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
                     mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
-                    printf("\n[COMPUTADOR]\nUsou uma expansão (linhas)"); // Cabeçalho para o CPU
+                    printf("\n[COMPUTADOR]\nUsou uma expans\u00E3o (linhas)"); // Cabeçalho para o CPU
                 } 
                 else if(jogadaAleatoria == 4){ // Se a jogada escolhida tiver sido "expandir as colunas", então:
                     colunasTotais++; // Incrementa as colunas do tabuleiro
@@ -151,7 +151,7 @@ int main(){
                     // Adiciona a jogada ao final da lista ligada
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
                     mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
-                    printf("\n[COMPUTADOR]\nUsou uma expansão (colunas)"); // Cabeçalho para o CPU
+                    printf("\n[COMPUTADOR]\nUsou uma expans\u00E3o (colunas)"); // Cabeçalho para o CPU
                 } 
 
                 printf("\nPressione a tecla ENTER para continuar");
@@ -175,11 +175,11 @@ int main(){
         }
 
         // Escolha da jogada a efetuar por um jogador humano
-        printf("Que jogada queres efetuar? (P - Peça / H - Habilidade / T - Tabuleiro / E - Sair): ");
+        printf("Que jogada queres efetuar? (P - Pe\u00E7a / H - Habilidade / T - Tabuleiro / E - Sair): ");
         scanf("%c", &escolha); // Escolha: P - Colocar uma peça. H - Colocar uma pedra ou expandir. T - Ver as K jogadas anteriores.
         switch(escolha){
             case 'P': // No caso do utilizador querer colocar uma peça
-                printf("Onde queres colocar a tua peça? (Linha Coluna Cor): ");
+                printf("Onde queres colocar a tua pe\u00E7a? (Linha Coluna Cor): ");
                 scanf("%d %d %c", &linha, &coluna, &cor);
 
                 if(colocarPeca(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais)){ // Se o jogador tiver conseguido colocar a peça
@@ -264,7 +264,7 @@ int main(){
                 }
                 // Se o jogador tiver escolhido efetuar uma expansão
                 if(habilidade == 'E' && expandir > 0){
-                    printf("Qual é o tipo de expansão que queres fazer? (L - Linha / C - Coluna): ");
+                    printf("Qual \u00E9 o tipo de expans\u00E3o que queres fazer? (L - Linha / C - Coluna): ");
                     scanf("\n%c", &tipo);
                     if(tipo == 'L') linhasTotais += 1; // Se o utilizador tiver escolhido expandir uma linha, incrementa as linhas do tabuleiro
                     else if(tipo == 'C') colunasTotais += 1; // Se o utilizador tiver escolhido expandir uma coluna, incrementa as colunas do tabuleiro
