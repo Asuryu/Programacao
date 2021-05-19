@@ -79,29 +79,29 @@ int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int co
 
     if(empate == linhas * colunas){ // Se o contador for igual ao produto das linhas pelas colunas quer dizer que não há nenhum espaço em branco
         mostrarASCII();
-        printf("\n*** O JOGO ACABOU NUM EMPATE! ***\nFica para a pr\u00F3xima!\n");
+        printf("\n*** O JOGO ACABOU NUM EMPATE! ***\nFica para a próxima!\n");
         scanf("%c", &cor);
         return 1;
     }
 
     if(horizontal == colunas){ // Se o contador for igual ao número de colunas quer dizer que a coluna está completa com a mesma cor
         mostrarASCII();
-        if(turno == 0) printf("\n*** O JOGADOR A \u00C9 O VENCEDOR DO JOGO! ***\nLinha preenchida!\n");
-        else printf("\n*** O JOGADOR B \u00C9 O VENCEDOR DO JOGO! ***\nLinha preenchida!\n");
+        if(turno == 0) printf("\n*** O JOGADOR A É O VENCEDOR DO JOGO! ***\nLinha preenchida!\n");
+        else printf("\n*** O JOGADOR B É O VENCEDOR DO JOGO! ***\nLinha preenchida!\n");
         scanf("%c", &cor);
         return 1;
     }
     else if(vertical == linhas){ // Se o contador for igual ao número de linhas quer dizer que a linha está completa com a mesma cor
         mostrarASCII();
-        if(turno == 0) printf("\n*** O JOGADOR A \u00C9 O VENCEDOR DO JOGO! ***\nColuna preenchida!\n");
-        else printf("\n*** O JOGADOR B \u00C9 O VENCEDOR DO JOGO! ***\nColuna preenchida!\n");
+        if(turno == 0) printf("\n*** O JOGADOR A É O VENCEDOR DO JOGO! ***\nColuna preenchida!\n");
+        else printf("\n*** O JOGADOR B É O VENCEDOR DO JOGO! ***\nColuna preenchida!\n");
         scanf("%c", &cor);
         return 1;
     }
     else if(diagonal == linhas || diagonalX == linhas){ // Se o contador for igual ao número de linhas/colunas quer dizer que ou a diagonal principal ou a diagonal "secundária" está completa com a mesma cor
         mostrarASCII();
-        if(turno == 0) printf("\n*** O JOGADOR A \u00C9 O VENCEDOR DO JOGO! ***\nDiagonal preenchida!\n");
-        else printf("\n*** O JOGADOR B \u00C9 O VENCEDOR DO JOGO! ***\nDiagonal preenchida!\n");
+        if(turno == 0) printf("\n*** O JOGADOR A É O VENCEDOR DO JOGO! ***\nDiagonal preenchida!\n");
+        else printf("\n*** O JOGADOR B É O VENCEDOR DO JOGO! ***\nDiagonal preenchida!\n");
         scanf("%c", &cor);
         return 1;
     }
