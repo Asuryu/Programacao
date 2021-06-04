@@ -183,9 +183,9 @@ int main(){
                 scanf("%d %d %c", &linha, &coluna, &cor);
 
                 if(colocarPeca(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais)){ // Se o jogador tiver conseguido colocar a peça
-                    if(jogadaVencedora(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais, turno)){ // Verifica a possibilidade de a jogada ter surtido numa vitória ou empate
+                    if(jogadaVencedora(tabuleiro, cor, linha, coluna, linhasTotais, colunasTotais, turno)){ // Verifica a possibilidade de a jogada ter surtido numa vitória
                         
-                        // Caso a jogada tenha surtido numa vitória ou empate:
+                        // Caso a jogada tenha surtido numa vitória:
 
                         // Adiciona a jogada à lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, cor, linha, coluna);
@@ -215,7 +215,7 @@ int main(){
                         exit(0); // Sai do jogo
 
                     }
-                    else { // Se a jogada não tiver surtido numa vitória ou empate:
+                    else { // Se a jogada não tiver surtido numa vitória :
                         
                         // Adiciona a jogada à lista ligada
                         lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, cor, linha, coluna);

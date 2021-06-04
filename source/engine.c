@@ -46,7 +46,6 @@ void mostrarTabuleiro(char **tabuleiro, int linhas, int colunas, int swtc){
 int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int colunas, int turno){
 
     // Flags de controlo
-    int empate = 0; 
     int horizontal = 0;
     int vertical = 0;
     int diagonal = 0;
@@ -70,19 +69,7 @@ int jogadaVencedora(char **tabuleiro, char cor, int l, int c, int linhas, int co
             else diagonalX += 1; // Se não o contador incrementa
         }
     }
-    for(int i = 0; i < linhas; i++){ // Percorre as linhas do tabuleiro
-        for(int j = 0; j < colunas; j++){ // Percorre as colunas do tabuleiro
-            if(tabuleiro[i][j] != '_') empate += 1; // Se a posição é diferente de "_" o contador incrementa
-            else empate = 0; // Se não o contador volta a zero
-        }
-    }
 
-    if(empate == linhas * colunas){ // Se o contador for igual ao produto das linhas pelas colunas quer dizer que não há nenhum espaço em branco
-        mostrarASCII();
-        printf("\n*** O JOGO ACABOU NUM EMPATE! ***\nFica para a pr\u00F3xima!\n");
-        scanf("%c", &cor);
-        return 1;
-    }
 
     if(horizontal == colunas){ // Se o contador for igual ao número de colunas quer dizer que a coluna está completa com a mesma cor
         mostrarASCII();
