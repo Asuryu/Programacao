@@ -54,6 +54,7 @@ int menu(){
     printf("0 - Sair do jogo\n\n");
 
     printf("Op\u00E7\u00E3o: ");
+    fflush(stdin);
     scanf("%d", &escolha);
 
     if(escolha == 1) return 0;
@@ -61,9 +62,6 @@ int menu(){
     else if(escolha == 3) howToPlay();
     else if(escolha == 0) exit(0);
     else menu();
-
-    menu();
-    return -1;
 }
 
 void howToPlay(){
@@ -74,59 +72,34 @@ void howToPlay(){
     printf("> \u00C9 gerado um tabuleiro quadrado com dimens\u00E3o aleat\u00F3ria (entre 3 e 5 linhas) e cada jogador ");
     printf("pode escolher jogar uma pe\u00E7a ou utilizar uma habilidade especial.\n\n");
     char continuar;
-    do {
-        printf("Continuar? (S/N) ");
-        scanf("\n%c", &continuar);
-
-        if (continuar == 'N') break;
-        else if (continuar == 'S') break;
-
-    } while (continuar != 'S' || continuar != 'N');
-
-    if (continuar == 'N') return;
+    printf("\nPressione a tecla ENTER para continuar");
+    fflush(stdin);
+    getchar();
 
     mostrarASCII();
     printf("> Alternadamente, os jogadores v\u00E3o colocando pe\u00E7as de cor\nVERDE (G), AMARELA (Y) ou VERMELHA (R)\n\n");
     printf("> Ganha o jogador que coloque uma pe\u00E7a que permita formar uma linha, coluna ou diagonal completa com pe\u00E7as da mesma cor\n\n");
-    do {
-        printf("Continuar? (S/N) ");
-        scanf("\n%c", &continuar);
-
-        if (continuar == 'N') break;
-        else if (continuar == 'S') break;
-
-    } while (continuar != 'S' || continuar != 'N');
-
-    if (continuar == 'N') return;
+    printf("\nPressione a tecla ENTER para continuar");
+    fflush(stdin);
+    getchar();
 
     mostrarASCII();
     printf("> As jogadas v\u00E1lidas relativas a colocar uma pe\u00E7a s\u00E3o as seguintes:\n\n");
     printf("1. Colocar uma pe\u00E7a VERDE numa c\u00E9lula vazia\n");
     printf("2. Trocar uma pe\u00E7a VERDE por uma pe\u00E7a AMARELA\n");
     printf("3. Trocar uma pe\u00E7a AMARELA por uma pe\u00E7a VERMELHA\n\n");
-    do {
-        printf("Continuar? (S/N) ");
-        scanf("\n%c", &continuar);
+    printf("\nPressione a tecla ENTER para continuar");
+    fflush(stdin);
+    getchar();
 
-        if (continuar == 'N') break;
-        else if (continuar == 'S') break;
-
-    } while (continuar != 'S' || continuar != 'N');
-
-    if (continuar == 'N') return;
 
     mostrarASCII();
     printf("> Para além de jogarem pe\u00E7as, os jogadores podem tamb\u00E9m utilizar habilidades especiais:\n\n");
     printf("1. Colocar uma pedra numa c\u00E9lula vazia (limitada a 1 por jogo)\n");
     printf("2. Adicionar uma nova linha ou coluna ao final do tabuleiro (limitada a 2 por jogo)\n\n");
-    do {
-        printf("Continuar? (S/N) ");
-        scanf("\n%c", &continuar);
-
-        if (continuar == 'N') break;
-        else if (continuar == 'S') break;
-
-    } while (continuar != 'S' || continuar != 'N');
+    printf("\nPressione a tecla ENTER para continuar");
+    fflush(stdin);
+    getchar();
 
     return;
 

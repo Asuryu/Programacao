@@ -5,6 +5,8 @@
 // COMPILAR O CÓDIGO:
 // gcc -c main.c
 // gcc -c ./source/engine.c -o ./o/engine.o
+// gcc -c ./source/files.c -o ./o/files.o
+// gcc -c ./source/utils.c -o ./o/utils.o
 // gcc -o output main.o ./o/engine.o ./o/files.o ./o/utils.o
 
 #include <stdio.h>
@@ -54,7 +56,7 @@ int main(){
     if(flag == 0){ // Se o utilizar não tiver escolhido continuar o jogo anterior, então:
 
         if(menu() == 0) computador = 0; // Se menu() retornar 0 então o utilizador não quer jogar contra o computador
-        else computador = 1; // Caso contrário, o jogador B será o computador
+        else if(menu() == 1) computador = 1; // Se menu() retornar 1 então o jogador B será o computador
 
         jogadorA.nome = 'A'; // Jogador A
         jogadorA.pedras = 1; // Inicialização das pedras do jogador A
@@ -138,12 +140,12 @@ int main(){
                     printf("\n[COMPUTADOR]\nColocou uma pedra no tabuleiro"); // Cabeçalho para o CPU
                 } 
                 else if(jogadaAleatoria == 3){ // Se a jogada escolhida tiver sido "expandir as linhas", então:
-                    linhasTotais++; // Incrementa as linhas do tabuleiro
+                    colunasTotais++; // Incrementa as linhas do tabuleiro
                     getchar();
                     // Adiciona a jogada ao final da lista ligada
                     lista = insere_final(lista, tabuleiro, linhasTotais, colunasTotais, jogada, turno, computador, 'E', 0, 0);
                     mostrarTabuleiro(tabuleiro, linhasTotais, colunasTotais, 1); // Mostra o tabuleiro depois do CPU ter feito a jogada
-                    printf("\n[COMPUTADOR]\nUsou uma expans\u00E3o (linhas)"); // Cabeçalho para o CPU
+                    printf("\n[COMPUTADOR]\nUsou uma expans\u00E3o (colunas)"); // Cabeçalho para o CPU
                 } 
                 else if(jogadaAleatoria == 4){ // Se a jogada escolhida tiver sido "expandir as colunas", então:
                     colunasTotais++; // Incrementa as colunas do tabuleiro
