@@ -207,7 +207,7 @@ int verificaJogadaCPU(char **tabuleiro, int linhas, int colunas, int indicador, 
 
     else if(indicador == 3){ // Se a jogada aleatoriamente escolhida tiver sido expandir uma linha:
         if(expandir > 0){ // Se o CPU tiver expansões para utilizar:
-            tabuleiro = expandirTabuleiro(tabuleiro, linhas + 1, colunas, 'L'); // Expande o tabuleiro por uma linha
+            tabuleiro = expandirTabuleiro(tabuleiro, linhas, colunas + 1, 'C'); // Expande o tabuleiro por uma linha
             B->expandir = expandir - 1; // Decrementa as expansões disponíveis para o CPU
             return 5; // Retorna um indicador de sucesso particular
         }
